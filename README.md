@@ -2,7 +2,7 @@
 
 Lecture notes for the **first semester** of the Thermodynamics course at UCO (University of Córdoba). Typeset in **LaTeX**. 
 
-> **Note**: This compendium covers the foundational principles of Thermodynamics. Advanced topics such as chemical potential, phase equilibrium, and statistical thermodynamics are addressed in the second semester within the **Thermodynamics II** course.
+> **Note**: This compendium covers the foundational principles of Classical Thermodynamics. Advanced topics—such as chemical potential, phase equilibrium, and multi-component systems—are addressed in the second semester within the **Thermodynamics II** course. Furthermore, the microscopic and probabilistic foundations of these phenomena are explored in depth during the third year in the **Statistical Physics** course.
 
 # Contents (First Semester)
 The PDF document focuses on the macroscopic laws of equilibrium and energy:
