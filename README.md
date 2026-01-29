@@ -4,8 +4,6 @@ Lecture notes for the **first semester** of the Thermodynamics course at UCO (Un
 
 > **Note**: This compendium covers the foundational principles of Thermodynamics. Advanced topics such as chemical potential, phase equilibrium, and statistical thermodynamics are addressed in the second semester within the **Thermodynamics II** course.
 
-Each chapter is prefaced with an image from NASA's 'Astronomy Picture of the Day' (APOD) project. These images are used for educational purposes, and authorship belongs to the photographers and institutions credited by NASA in each case.
-
 # Contents (First Semester)
 The PDF document focuses on the macroscopic laws of equilibrium and energy:
 
@@ -16,3 +14,4 @@ The PDF document focuses on the macroscopic laws of equilibrium and energy:
 5. **The Second Law and Heat Engines**. Analysis of efficiency and the physical roots of irreversibility.
 6. **The Carnot Cycle and Entropy**. Definition of Entropy ($S$) as a state function and the foundation of the arrow of time.
 
+"Chapters 5 and 6 feature original thermodynamic diagrams of heat engines, providing a rigorous visual representation of thermal cycles and their industrial applications."
