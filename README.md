@@ -15,3 +15,6 @@ The PDF document focuses on the macroscopic laws of equilibrium and energy:
 6. **The Carnot Cycle and Entropy**. Definition of Entropy ($S$) as a state function and the foundation of the arrow of time.
 
 "Chapters 5 and 6 feature original thermodynamic diagrams of heat engines, providing a rigorous visual representation of thermal cycles and their industrial applications."
+
+<img width="604" height="211" alt="image" src="https://github.com/user-attachments/assets/65634b20-88b5-4546-8358-d95a62378729" />
+
