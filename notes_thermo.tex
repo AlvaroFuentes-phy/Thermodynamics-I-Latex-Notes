@@ -1,0 +1,2103 @@
+\documentclass[11pt,a4paper, openany]{book}
+
+% =======================
+% Paquetes básicos
+% =======================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathpazo}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{microtype}
+\usepackage{physics}
+\usetikzlibrary{arrows.meta, positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.markings}
+
+\newcommand{\dbar}{{\mkern3mu\mathchar'26\mkern-12mu \delta}}
+\usetikzlibrary{decorations.pathmorphing, decorations.pathreplacing, arrows.meta, positioning}
+
+% =======================
+% Configuración de página
+% =======================
+\geometry{margin=2.5cm}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+\headsep=30pt
+
+% =======================
+% Colores personalizados
+% =======================
+\definecolor{ucoblue}{HTML}{003366}
+\definecolor{ucogold}{HTML}{C6A664}
+\definecolor{lightgray}{HTML}{F5F5F5}
+
+% =======================
+% Encabezado y pie
+% =======================
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textbf{Termodinámica}}
+\lhead{\includegraphics[height=1cm]{uco-logo.png}}
+\cfoot{\thepage}
+
+% =======================
+% Estilo de títulos
+% =======================
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{ucoblue}}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{ucogold}}
+  {\thesubsection}{1em}{}
+
+% =======================
+% Entornos Teorema, Ley, etc.
+% =======================
+\newtheoremstyle{ucostyle}
+  {10pt} % Space above
+  {10pt} % Space below
+  {\itshape} % Body font
+  {} % Indent
+  {\bfseries\color{ucoblue}} % Head font
+  {.} % Punctuation after theorem name
+  {0.5em} % Space after theorem name
+  {} % Theorem head spec
+
+\theoremstyle{ucostyle}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{ley}{Ley}[section]
+\newtheorem{corolario}{Corolario}[section]
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{ejemplo}{Ejemplo}[section]
+
+% =======================
+% Cajas personalizadas
+% =======================
+\tcbset{
+  frame code={},
+  center title,
+  left=2mm,
+  right=2mm,
+  top=1mm,
+  bottom=1mm,
+  colback=lightgray,
+  colframe=ucoblue!60!black,
+  fonttitle=\bfseries,
+  rounded corners,
+  enhanced,
+  boxrule=0.6pt
+}
+
+% Caja de fórmula
+\newtcolorbox{formula}[1][]{
+  colback=ucoblue!5!white,
+  colframe=ucoblue!70!black,
+  title=#1
+}
+
+% Caja de nota
+\newtcolorbox{nota}[1][]{
+  colback=ucogold!10!white,
+  colframe=ucogold!70!black,
+  title=#1
+}
+
+% =======================
+% Documento
+% =======================
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{3cm}
+  {\Huge \bfseries Apuntes para la asignatura de Termodinámica  \\[0.5em]}
+  {\Large Universidad de Córdoba}\\[1em]
+  \vspace{15pt}
+  \includegraphics[width=7cm]{Logotipo_I_Facultad_de_Ciencias_Fondo_blanco_negativo.png}\\
+ 
+  \vspace{2cm}
+  {\large Autor: Álvaro Fuentes Sánchez}\\
+  {\large Profesores: Rut Morales Crespo y Cristina Yubero Serrano }
+  \vspace{3cm}
+  \hspace{2cm}
+\begin{flushleft}
+\Large\textit{«Una vez que llegué a casa, me enfurruñé un rato. Todos mis planes brillantes frustrados por la termodinámica. ¡Maldita seas entropía!»}\\[0.5em]
+\large--- Andy Weir
+\end{flushleft}
+\end{titlepage}
+
+
+\clearpage
+\thispagestyle{empty} % Quita el número de página
+
+\begin{center}
+    \Large \textbf{Derechos de autor}
+\end{center}
+
+\vspace{0.5cm}
+
+Al ser unos apuntes de clase, este documento no pretende ser un trabajo original, sino que está basado en gran parte en las clases impartidas en la \textbf{Universidad de Córdoba} y diversos libros de texto de referencia. Para hacer la lectura más amena, se han omitido las referencias explícitas en cada sección.
+
+\vspace{0.3cm}
+
+  Estos apuntes están escritos bajo la licencia Creative Commons, concretamente con la licencia:
+
+\begin{center}
+    \textbf{Reconocimiento-NoComercial CC-BY-NC}
+\end{center}
+
+  Esto implica que:
+\begin{itemize}[label=\textbullet]
+    \item El beneficiario de la licencia tiene el derecho de copiar, distribuir, exhibir y representar la obra y hacer obras derivadas siempre y cuando reconozca y cite la obra de la forma especificada por el autor.
+    \item El beneficiario de la licencia tiene el derecho de copiar, distribuir, exhibir y representar la obra y hacer obras derivadas para fines no comerciales.
+\end{itemize}
+
+\vspace{0.5cm}
+
+
+\begin{center}
+    \Large \textbf{Copyright}
+\end{center}
+
+\vspace{0.5cm}
+
+  Being a set of lecture notes, this work does not pretend to be original, but clearly relies heavily on textbooks and courses from the \textbf{University of Córdoba}. In order to make the text more readable, we have omitted the explicit references throughout the text.
+
+\vspace{0.3cm}
+
+  This work has been written under the Creative Commons license, more specifically under the licence:
+
+\begin{center}
+    \textbf{Attribution-NonCommercial CC-BY-NC}
+\end{center}
+
+  This means that:
+\begin{itemize}[label=\textbullet]
+    \item Licensees may copy, distribute, display and perform the work and make derivative works based on it only if they give the author or licensor the credits in the manner specified by these.
+    \item Licensees may copy, distribute, display and perform the work and make derivative works based on it only for noncommercial purposes.
+\end{itemize}
+
+\vspace{1.5cm}
+
+\begin{flushright}
+    Fuente Palmera, \today
+\end{flushright}
+
+
+
+
+\tableofcontents
+\newpage
+
+\chapter{Introducción a la Termodinámica y conceptos previos}
+La termodinámica es la ciencia que estudia el intercambio de energía entre sistemas materiales en forma de calor o trabajo. 
+\\
+Para desarrollar la asignatura introduciremos una serie de conceptos previos
+\\
+
+Un sistema termodinámico es cualquier sistema material, el cual está sujeto a una serie de variables, como son la masa y el volumen, como mínimo. 
+\\
+
+Para determinar el estado de un sistema, se deben caracterizar sus variables. Si sus magnitudes son diferentes, lo será su estado. Además, un sistema material termodinámico interactúa con otros, lo que genera otra de las variables mínimas: la presión. 
+\\
+
+\begin{definicion}[Variables termodinámicas]
+Caracterizan el sistema y determinan su estado; como mínimo, las que nos encontramos son $n,P,V,T$. Están relacionadas según
+\begin{equation}
+    F(V,n,T,P)=0
+\end{equation}
+es decir son independientes. Siendo las variables de estado, las independientes y mínimas que determinan totalmente el estado termodinámico.
+\\
+
+\begin{definicion}[Ecuaciones de estado]
+Relacionan el resto de variables con las de estado, y no tienen por qué existir necesariamente. Por ejemplo:
+\begin{equation*}
+    PV=nRT
+\end{equation*}
+Solo existen cuando el sistema está en equilibrio.
+\end{definicion}
+
+\begin{definicion}[Variables extensivas e intensivas]
+Para establecer si una variable es extensiva o intensiva, establecemos la siguiente regla:
+\begin{itemize}
+    \item Si depende del tamaño o de la cantidad de materia del sistema, será extensiva.
+    \item Si, al dividir el sistema, también se dividiría la variable, también es extensiva.
+    \item Si no se verifica ninguno de los puntos anteriores, se trata de una variable intensiva.
+\end{itemize}
+\end{definicion}
+\end{definicion}
+
+\begin{definicion}[Magnitudes específicas]
+Las magnitudes específicas son la forma de expresar cualquier variable extensiva de manera intensiva, y lo conseguimos dividiendo entre la masa. Es decir, \begin{equation}
+v=\frac{V}{m}
+\end{equation}
+y de manera general pues
+\begin{equation}
+x=\frac{X}{m}
+\end{equation}
+\end{definicion}
+\begin{definicion}[Universo]
+Está formado por todos los sistemas; está exento de interacciones termodinámicas.
+\end{definicion}
+
+\section{Equilibrio en un sistema}
+Normalmente, para los sistemas, pongamos como ejemplo un recinto que contiene un fluido turbulento: las variables $A=A(\vec{r}, t)$, o $A=A(\vec{r})$ es estacionario pues no depende de $t$, o bien $A=A(t)$ es uniforme pues no depende de $\vec{r}$. Solo en el caso de que todas las variables intensivas del sistema sean estacionarias y uniformes podremos decir que el sistema está en equilibrio. Por lo que diremos que existe ecuación de estado. 
+
+\section{Concepto de proceso termodinámico}
+Se define un proceso termodinámico como el intercambio de energía con otros sistemas, diferenciando entre:
+\begin{itemize}
+    \item Procesos de relajación: de un estado inicial de equilibrio a uno final sin ningún intermedio. Además, duran un tiempo limitado y son irreversibles.
+    \item Procesos cuasiestáticos: salta entre estados de equilibrio, desde el inicial hasta el final. Para que un proceso sea reversible será cuasiestático necesariamente; la implicación contraria es falsa.
+    Además, el tiempo es idealmente infinito.
+\end{itemize}
+\section{Formulaciones de la Termodinámica}
+
+La Termodinámica clásica se basa en un conjunto de principios a partir de los cuales se deduce el comportamiento termodinámico de cualquier sistema. Dependiendo de los principios que se elijan, existen tres formulaciones distintas de la Termodinámica que desembocan en los mismos resultados
+\subsection{Formulación de Clausius-Kelvin}
+Se basa en las maquinas térmicas y en los conceptos de calor y trabajo. Parte de dos principios fundamentales: 
+\begin{enumerate}
+    \item No existe el móvil perpetuo de primera especie: Es imposible construir una maquina que produzca trabajo indefinidamente sin consumir, como mínimo, una cantidad equivalente de energía. 
+    \item No existe el móvil perpetuo de segunda especie: Es imposible construir una máquina térmica que transforme íntegramente el calor en trabajo. 
+\end{enumerate}
+
+
+\subsection{Formulación de Carathedédory}
+De tipo matemático. Añade a la anterior el concepto de entropía de forma axiomática. 
+
+
+\subsection{Formulación MTE (Macroscopic Thermodinamics of Equilibrum)}
+Deduce toda la teoría termodinámica a partir de cuatro postulados matemáticos: 
+\begin{enumerate}
+    \item Todo sistema temodinámico posee un conjunto de variables naturales, $x_i$ que determinan sus estado de equilibrio. 
+    \item Se llama entropía a una función de dichas variables, $S(x_i)$, que en el equilibrio alcanza el valor máximo compatible con las condiciones en las que se encuentra el sistema
+    \item La función entropía es aditiva respecto a los subsistemas que constituyen el sistema y es una función monótona creciente de la energía. 
+    \item EL límite al que tiende la entropia cuando la temperatura tiende a $0 \text{K}$ es cero: 
+    \begin{equation}
+        \lim_{T\xrightarrow{}0\text{K}}S(x_i)=0
+    \end{equation}
+\end{enumerate}
+
+
+
+
+
+
+
+\chapter{Principio 0 de la termodinámica. Concepto de Temperatura}
+
+
+Iniciaremos este nuevo tema estudiando el concepto de interacción termodinámica.
+\begin{definicion}[Interacción Termodinámica]
+Al producirse una interacción termodinámica se produce un flujo de energía entre un sistema y el resto del universo. Este flujo puede ser: 
+\begin{enumerate}
+    \item Mecánico: debido a alguna interacción física, obteniendo trabajo ($W$)
+    \item Químico: debido a algún intercambio de materia
+    \item Termico: debido al intercambio de calor $Q$
+\end{enumerate}
+\end{definicion}
+
+Estos intercambios se producen a través de superficies, entonces tenemos: 
+\begin{enumerate}
+    \item Superficies moviles o rígidas
+    \item Superficies permeables
+    \item Superficies diatermicas o adíabticas. Si se produce o no intercambio de calor respectivamente
+\end{enumerate}
+Tras las interacciones termodinámicas, cuando las variables termodinámicas no dependen ni del tiempo ni de la posición se dice que el sistema se encuentra en estado de equilibrio, que es el cuerpo de estudio de la termodinámica clásica. Por lo tanto podemos indicar tres tipos de equilibrios
+\begin{enumerate}
+    \item Equilibrio mecánico
+    \item Equilibrio químico 
+    \item Equilibrio térmico
+\end{enumerate}
+
+\section{Hipotesis del equilibrio termodinámico}
+\begin{teorema}[Hipotesis del equilibrio termodinámico]
+    Tenemos un sistema $A$ caracterizado por un conjunto de variables $A \rightarrow \{ a_i\}$ que interacciona con el medio o con otro sistema $B\rightarrow \{ b_j\}$, ocurre que las variables no son libres sino que se encuentran ligadas mediante una relación funcional 
+    \begin{equation}
+        F(a_i,b_j)=0
+    \end{equation}
+    Cuando dos sistemas $A$ y $B$ pueden interactuar termodinamicamente y estan en equilibrio, existe 
+    \begin{formula}
+        \begin{equation*}
+               F(a_i,b_j)=0
+        \end{equation*}
+    \end{formula}
+    relacionando sus variables
+\end{teorema}
+\section{Principio cero de la Termodinámica}
+En base al concepto de equilibrio termodinámico establecemos el siguiente principio
+\begin{teorema}[Principio Cero de la Termodinámica]
+Si un sistema $A$ está en equilibrio térmico con otro sistema $B$ y simultaneamente con otro sistema $C$, los sistemas $B$ y $C$ se encuentran en equilibrio térmico entre sí.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{Principio_Cero.png}
+    \caption{Principio 0 de la Termodinámica. Tres sistemas en equilibrio térmico entre ellos.}
+    \label{Principio cero}
+\end{figure}
+\end{teorema}
+\begin{proof}
+    Por la hipótesis del equilibrio termodinámico, supongamos tres sistemas: 
+    \begin{equation*}
+        A: \{a_i \}_{i=1} \quad B: \{b_j \}_{j=1} \quad C: \{c_k \}_{k=1} 
+    \end{equation*}
+Ahora si 
+\begin{align}
+    A|C \longrightarrow \exists F(a_i, c_k)=0 \xrightarrow{\text{despejamos por ejemplo $c_1$}} c_1=f(a_i,c_k)_{k\neq1}
+    \\
+      B|C \longrightarrow \exists G(b_j, c_k)=0 \xrightarrow{\text{despejamos por ejemplo $c_1$}} c_1=f(b_j,c_k)_{k\neq1}
+\end{align}
+y por lo tanto debe ocurrir que 
+\begin{equation*}
+    f(a_i,c_k)=g(b_j,c_k)
+\end{equation*}
+por lo tanto $A$ y $B$ están en equilibrio térmico de forma que $A|B \rightarrow H(a_i,b_j)=0$
+\end{proof}
+Partiendo de esta demostración podemos obtener una expresión para la temperatura empírica. 
+\\
+
+Como ambas funciones representan la misma realidad física: $A|B$, separamos sus variables de forma que: 
+\begin{equation*}
+    \begin{cases}
+        F(a_i, c_k)= \varphi(c_k)\theta(a_i)
+        \\
+        G(b_j, c_k)=\varphi(c_k) \theta(b_j)
+    \end{cases}
+\end{equation*}
+y podemos escribir que
+\begin{equation*}
+    \varphi(c_k)\theta(a_i)=\varphi(c_k) \theta(b_j)
+    \rightarrow \theta_A=\theta(a_i)
+\end{equation*}
+llegando a la definición de temperatura empírica. 
+Esta relación que liga $\theta$ con el resto dee variables del sistema se le denomina ecuación térmica de estado. Estamos en el camino para dar una definición de temperatura. Si esto ocurre tal y como lo hemos descrito, deber existir una magnitud intensiva entre ambos sistemas que este desequilibrada para que se desencaden un proceso termodinámico. (Este concepto es muy similar al de fuerzas generalziadas) 
+\\
+
+Si partimos de la primera ecuación que relaciona $A$ y $C$ modificando las condiciones de superficie (suponiendo que $\exists y $) se da una interacción termodinámica (un intercambio de energía y/o momento) hasta que $y$ se iguala y llegamos a la segunda ecuación. De esta forma hemos pasado de un estado de equilibrio 1 a un estado de equilibrio 2. 
+\\
+
+\section{Medida de la temperatura. Escalas termométrica.}
+Para definir una escala de temperaturas necesitamos usar un patrón, lo que conocemos como sistema material que defina nuestra unidad. La comparación viene dada por el equilibrio térmico, la escala vendrá dada por alguna propiedad termométrica $(X)$.
+Además necesitamos puntos de referencia asociados a fénomenos (reproducibles) de nuestra escala y determinar ciertos parámetros $a$, $b$ y $c$. 
+\\
+
+La relación termométrica interesa que sea:
+\begin{itemize}
+    \item Simple $\theta=\theta(x)$
+    \item Sensible
+\end{itemize}
+\subsection{Escala centigrada}
+El sistema material es una columna de mercurio que usamos como patrón, y la longitud de la columna es la propiedad termométrica que usaremos para medir la dilatación del mercurio con la temperatura. 
+Definimos dos puntos de referencia:
+\begin{itemize}
+    \item El punto de fusión del hielo $T=0º\text{C}$
+    \item El punto de ebullición del agua $T=100º \text{C}$
+\end{itemize}
+
+\subsection{Escala absoluta, Kelvin o de gas ideal}
+El sistema material que usamos son los gases enrarecidos (ideales), con propiedad termométrica: 
+\begin{equation}
+    \lim_{p \to 0}P_v=\lim_{p \to 0} P \frac{V}{n}
+\end{equation}
+El fenómeno ermométrico que empleamos es la Ley de Boyle: \begin{equation}
+    \lim_{p \to 0} \frac{PV}{n}=a \theta >0
+\end{equation}
+es este hecho el que hace que esta escala sea definida positiva. 
+\\
+Como puntos de referencia se utiliza el punto triple del agua
+\begin{equation}
+    \begin{cases}
+    P_{PT}=611,73 \text{ Pa}
+    \\
+    T_{PT}=273,16 \text{ K}
+\end{cases}
+\end{equation}
+la constante $a$ de proporcionalidad se añade con el objetivo de igualar el paso entre ambas escalas. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Termometro de gas ideal.png}
+    \caption{Termómetro de gas ideal}
+    \label{fig:placeholder}
+\end{figure}
+
+\chapter{Trabajo termodinámico. Primer principio de la Termodinámica}
+\section{Concepto de trabajo}
+\begin{definicion}[Trabajo]
+El trabajo es la energía transferida entre un sistema y su entorno por métodos que no dependen de la diferencia de temperatura entre ambos. 
+\end{definicion}
+Supongamos un sistema discreto de $N$ particulas:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Sistema_discreto.png}
+    \caption{Sistema discreto de 4 particulas con sus posiciones definidas}
+    \label{fig:placeholder}
+\end{figure}
+Se define el trabajo termodinámico como 
+\begin{formula}
+    \begin{equation}
+        \delta W=- \vec{F}_{ext} \cdot \vec{dr}
+    \end{equation}
+\end{formula}
+Se puede demostrar que este trabajo equivale a la disminución de energía mecánica del sistema. En esta definición no tenemos en cuenta las posibles fuerzas internas que existan dentro del sistema, las cuales dan lugar a un trabajo interno. \\
+
+Introducimos ahora un teorema que permite relacionar este trabajo con la energía cinética. 
+\begin{teorema}[Teorema de las fuerzas vivas]
+Se verifica que
+\begin{equation}
+    W=\int(\vec{F_{ext}}+\vec{F}_{int}) \vec{dr}= \sum \Delta T
+\end{equation}  
+\end{teorema}
+tenemos que, al ser conservativas las fuerzas internas,
+\begin{equation}
+    W=\int\vec{F}_{ext} \cdot \vec{dr} - \int \vec{\nabla} V \cdot\vec{dr}= \sum\Delta T
+\end{equation} 
+Reorganizando la ecuación anterior, llegamos a la siguiente expresión que relaciona el trabajo con la variación de la energía interna: 
+\begin{equation}
+\int \sum_i
+\vec{F}_{ext_i} \cdot \vec{dr}_i=\Delta \sum_i (T+V)
+\end{equation}
+\begin{proof}
+Tenemos que
+\begin{equation}
+  W_{1\to 2}   = \int_{r_1}^{r_2} \vec{F} \cdot \vec{dr} =\int_{r_1}^{r_2} m\vec{a} \cdot \vec{dr}=\int_{r_1}^{r_2} m \frac{d\vec{v}}{dt} \cdot \vec{dr}=m\int_{r_1}^{r_2} \vec{v} \cdot d\vec{v}
+\end{equation}
+y ahora integrando
+\begin{equation*}
+    m \Bigl[\frac{v_2}{2}\Bigl]^{v_2}_{v_1}=\frac{1}{2}mv^2_2-\frac{1}{2}mv_1^2=    T_2-T_1= \Delta T
+\end{equation*}
+\end{proof}
+Retomemos la recién definida energía interna y establezcamos un criterio de signos. 
+\subsection{Criterio de signos}
+\begin{itemize}
+    \item Para $W>0$ la energía interna del sistema disminuye. 
+    \item Para $W<0$ la energía interna del sistema aumenta. Lo que se interpreta como el medio realizando trabajo sobre el sistema. 
+\end{itemize}
+
+\subsection{Trabajo de expansión}
+Consideremos un sistema de volumen $V$ limitado por una superficie $S$, cuya presión interior es $p$ y está sometido a una presión externa $p_{ext}$. Considerando un $ds$ de las fuerzas que actuan sobre el, llegamos a 
+\begin{equation}
+    d\vec{F}_{ext}=-p_{ext} \cdot ds\cdot \vec{u}_n
+\end{equation}
+Si el elemento de superficie se desplaza una distancia, el trabajo realizado (sup. un desplazamiento hacia afuera) podemos escribir
+\begin{equation}
+    \delta W= -d \vec{F}_{ext} \cdot \vec{dr}= p_{ext} \cdot ds \cdot \vec{u}_n \cdot \vec{dr}= p_{ext} ds dr= p_{ext} dV
+    \end{equation}
+por lo que el trabajo de expansión del sistema queda
+\begin{equation}
+    \delta W= p_{ext} dV
+\end{equation}
+para un proceso cuasiestático podemos escribir 
+\begin{equation}
+   \delta W=p dV \rightarrow W=\int_i^f P dV
+\end{equation}
+P y V están relacionados entre si mediante la ecuación del sistema qu estamos considerando. 
+\begin{ejemplo}[Sistema fácilmente compresible]
+Supongamos un sistema en equilibrio fácilmente compresible, como el que se muestra en la figura \ref{sistema_ejemplo}, donde un bloque de masas $m$ comprime un gas reduciendo su volumen
+\begin{figure}
+    \centering
+        \begin{tikzpicture}[scale=1]
+
+% --------- Primer recipiente ---------
+% Paredes
+\draw[line width=1pt] (0,0) -- (0,4);
+\draw[line width=1pt] (3,0) -- (3,4);
+\draw[line width=1pt] (0,0) -- (3,0);
+
+% Agua
+\fill[cyan!40] (0,0) rectangle (3,3);
+
+% Nivel de agua (línea discontinua)
+\draw[dashed] (0,3) -- (3,3);
+
+% --------- Segundo recipiente ---------
+% Paredes
+\draw[line width=1pt] (5,0) -- (5,4);
+\draw[line width=1pt] (8,0) -- (8,4);
+\draw[line width=1pt] (5,0) -- (8,0);
+
+% Agua
+\fill[cyan!40] (5,0) rectangle (8,2.0);
+
+% Bloque
+\draw[fill=gray!30] (6.3,2.0) rectangle (6.9,2.6);
+\node at (6.6,2.3) {\small $m$};
+
+\end{tikzpicture}
+    \caption{Sistema facilmente compresible}
+    \label{sistema_ejemplo}
+\end{figure}
+
+Vamos a considerara que estamos en ausencia de atmosfera para aislar el sistema. Calculemos el trabajo realizado, \begin{equation}
+    W=\int_A^B
+P_{ext} \cdot dV \xrightarrow{P_{ext \equiv \text{cte}}}W=P_{ext}  \int_A^B dV = P_{ext} (V_B-V_A)
+\end{equation}
+Si consideramos un paso intermedio como podemos ver en la figura \ref{sistema_ejemplo_3} podemos dividir el trabajo en etapas. De este montaje podemos dibujar el siguiente diagrama que representa la presión frente al volumen (como se ve en la figura \ref{fig:diagrama})
+
+\begin{figure}
+    \centering
+\begin{tikzpicture}
+
+    % ================= A =================
+% Recipiente
+\draw[line width=1pt] (0,0) -- (0,4);
+\draw[line width=1pt] (3,0) -- (3,4);
+\draw[line width=1pt] (0,0) -- (3,0);
+
+% Agua
+\fill[cyan!40] (0,0) rectangle (3,3);
+
+% Nivel
+\draw[dashed] (0,3) -- (3,3);
+
+% Etiqueta
+\node at (1.5,-0.6) {\textbf{A)}};
+
+% ================= C =================
+% Recipiente
+\draw[line width=1pt] (5,0) -- (5,4);
+\draw[line width=1pt] (8,0) -- (8,4);
+\draw[line width=1pt] (5,0) -- (8,0);
+
+% Agua
+\fill[cyan!40] (5,0) rectangle (8,2.5);
+
+% Nivel
+\draw[dashed] (5,2.5) -- (8,2.5);
+
+% Bloque
+\draw[fill=gray!30] (6.3,2.5) rectangle (6.9,3.1);
+\node at (6.6,2.8) {\small $m'$};
+
+% Etiqueta
+\node at (6.5,-0.6) {\textbf{C)}};
+
+% ================= B =================
+% Recipiente
+\draw[line width=1pt] (10,0) -- (10,4);
+\draw[line width=1pt] (13,0) -- (13,4);
+\draw[line width=1pt] (10,0) -- (13,0);
+
+% Agua
+\fill[cyan!40] (10,0) rectangle (13,2.5);
+
+% Bloques
+\draw[fill=gray!30] (10.8,2.5) rectangle (11.4,3.1);
+\draw[fill=gray!30] (11.9,2.5) rectangle (12.5,3.1);
+
+\node at (11.1,2.8) {\small $m'$};
+\node at (12.2,2.8) {\small $m'$};
+
+% Etiqueta
+\node at (11.5,-0.6) {\textbf{B)}};
+
+% ================= Flechas =================
+\draw[-{Stealth[length=3mm]}, thick]
+      (3.2,1.5) to[bend left=20] (4.8,1.5);
+
+\draw[-{Stealth[length=3mm]}, thick]
+      (8.2,1.5) to[bend left=20] (9.8,1.5);
+
+% Texto superior
+\node at (11.5,4.4) {$m' = 5\,\mathrm{kg}$};
+
+\end{tikzpicture}
+    \caption{Sistema compresible en dos etapas}
+    \label{sistema_ejemplo_3}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[scale=1]
+
+% ================= Ejes =================
+
+\draw[->, thick] (-0.5,0) -- (7,0); % eje horizontal
+\draw[->, thick] (0,-0.5) -- (0,5); % eje vertical
+
+% Etiquetas ejes
+\node[left] at (0,4.6) {$B$};
+\node[above] at (6.8,0) {$A$};
+
+% ================= Área C (naranja) =================
+\fill[orange!40] (1,0) rectangle (3.5,4);
+\draw[dashed, thick] (1,0) rectangle (3.5,4);
+
+% Línea superior discontinua roja
+\draw[dashed, red, thick] (1,4) -- (3.5,4);
+
+% Etiqueta C
+\node[above right] at (3.5,4) {$C$};
+
+% ================= Área A (azul) =================
+\fill[cyan!40] (3.5,0) rectangle (6,2.5);
+\draw[dashed, thick] (3.5,0) rectangle (6,2.5);
+
+% Etiqueta A
+\node[right] at (6,2.5) {$A$};
+
+% ================= Flecha Delta V =================
+\draw[-{Stealth[length=3mm]}, thick] (1,-0.8) -- (6,-0.8);
+
+\node at (3.5,-1.3) {$\Delta V = V_B - V_A$};
+
+\end{tikzpicture}
+
+    \caption{Diagrama para un sistema compresible en dos etapas }
+    \label{fig:diagrama}
+\end{figure}
+
+Para un paso infinitesimal entre un proceso y otro, el diagrama se vuelve una función continua donde el área encerrada bajo su curva es el trabajo realizado.
+\begin{figure}
+    \centering
+\begin{tikzpicture}[scale=1]
+
+% ================= Ejes =================
+
+\draw[->, thick] (-0.5,0) -- (7,0); % eje horizontal
+\draw[->, thick] (0,-0.5) -- (0,5); % eje vertical
+
+
+% ================= Puntos A y B =================
+\fill (6,2.5) circle (2pt);
+\fill (1,4) circle (2pt);
+
+\node[right] at (6,2.5) {$A$};
+\node[left]  at (1,4) {$B$};
+
+% ================= Curva con flechas =================
+\draw[
+  thick,
+  <->,
+  >=Stealth
+]
+  (1,4)
+  .. controls (2.5,4.2) and (4.5,3.0) ..
+  (6,2.5);
+
+% ================= Área bajo la curva =================
+\fill[orange!40]
+  (1,0) --
+  (1,4)
+  .. controls (2.5,4.2) and (4.5,3.0) ..
+  (6,2.5)
+  -- (6,0) --
+  cycle;
+
+% ================= Límites verticales =================
+\draw[dashed] (1,0) -- (1,4);
+\draw[dashed] (6,0) -- (6,2.5);
+
+% ================= Etiqueta del área =================
+\node at (3.8,1.3) {$W$};
+
+\end{tikzpicture}
+
+    \caption{Diagrama para un sistema compresible en pasos infenitesimales}
+    \label{fig:placeholder}
+\end{figure}
+\end{ejemplo}
+
+\begin{nota}
+    El trabajo no es una función de estado ya que depende de los procesos termodinámicos, y por lo tanto del camino que se recorre (ver \ref{diferencia en el camino})
+\end{nota}
+
+\begin{figure}
+    \centering
+                \begin{tikzpicture}[scale=1.1]
+
+% ================= Ejes =================
+\draw[->, thick] (-0.5,0) -- (6.5,0) node[right] {$V$};
+\draw[->, thick] (0,-0.5) -- (0,5.5) node[above] {$P$};
+
+% ================= Puntos =================
+\coordinate (B) at (2,4.5);
+\coordinate (A) at (5,2.2);
+
+\fill (B) circle (2pt);
+\fill (A) circle (2pt);
+
+\node[left] at (B) {$B$};
+\node[right] at (A) {$A$};
+
+% ================= Área bajo gamma_1 (gris) =================
+\fill[gray!35]
+  (2,0) --
+  (B)
+  .. controls (2.6,3.0) and (4.0,2.2) ..
+  (A)
+  -- (5,0) --
+  cycle;
+
+% ================= Área entre gamma_2 y gamma_1 (naranja) =================
+\fill[orange!40]
+  (B)
+  .. controls (3.0,4.8) and (4.2,4.0) ..
+  (A)
+  .. controls (4.0,2.2) and (2.6,3.0) ..
+  (B)
+  -- cycle;
+
+% ================= Curva gamma_1 =================
+\draw[
+  thick,
+  -{Stealth[length=3mm]}
+]
+  (B)
+  .. controls (2.6,3.0) and (4.0,2.2) ..
+  (A);
+
+\node at (3.6,1.7) {$\gamma_1$};
+
+% ================= Curva gamma_2 =================
+\draw[
+  thick,
+  orange!80!black,
+  -{Stealth[length=3mm]}
+]
+  (A)
+  .. controls (4.2,4.0) and (3.0,4.8) ..
+  (B);
+
+\node[orange!80!black] at (4.1,4.4) {$\gamma_2$};
+
+% ================= Líneas verticales =================
+\draw[dashed] (2,0) -- (B);
+\draw[dashed] (5,0) -- (A);
+
+\end{tikzpicture}
+
+    \caption{Diferencia en el trabajo producido entre dos caminos}
+    \label{diferencia en el camino}
+\end{figure}
+
+Un caso que necesitamos destacar es el de un proceso cíclico (ver figura \ref{ciclo}), donde el trabajo corresponde con el área del ciclo, 
+\begin{itemize}
+    \item si este ciclo se realiza en sentido $W>0$
+    \item si se realiza en sentido antihorario $W>0$
+\end{itemize}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{maquina:carnot.png}
+    \caption{Maquina de Carnot: ejemplo de proceso cíclico}
+    \label{ciclo}
+\end{figure}
+\newpage
+
+\begin{ejemplo}[Descripción termodinámica del efecto Joule]
+Sabemos que el efecto Joule es al fenómeno irreversible por el cual si en un conductor circula corriente eléctrica, parte de la energía cinética de los electrones se transforma en calor.  En una pila eléctrica la distribución de cargas permite el salto de potencial. Definimos su fuerza electromotriz como: 
+\begin{equation}
+    \varepsilon=V_2-V_1 \quad
+    \text{(escalón de potencial)}
+\end{equation}
+Escribamos su energía propia, que para un paso infinitesimal de carga tenemos que
+\begin{equation}
+    E_{prop}=\varepsilon(q+dq)
+\end{equation}
+
+Construimos una termodinámica basada en las variables $\{ E.q.T\}$, fijandonos en la energía final, escribimos el diferencial de energía propia como $dE_{prop}= \varepsilon dq$ , de forma que: 
+\begin{equation}
+    E_{prop}=\varepsilon q+ \varepsilon dq
+\end{equation}
+
+Para $dq>0$ se ejerce un trabajo que vendrá dado por 
+\begin{equation}
+    W=- \int dE_{prop}=-E_{prop} \int dq
+\end{equation}
+con $\varepsilon=\varepsilon(q,T)$ como ecuación térmica de estado. 
+\end{ejemplo}
+\section{Trabajo en procesos cuasiestáticos}
+\subsection{Procesos isocoros}
+Son aquellos que se producen a presión constante, de forma que $dV=0$ y su trabajo
+\begin{equation}
+    W=\int P dV=0
+\end{equation}
+
+\subsection{Procesos isobaros}
+Son aquellos procesos que se llevan a cabo a presión constante de forma que su trabajo se puede escribir como
+\begin{equation}
+    W=\int_1^2 P dV=P \Delta V
+\end{equation}
+La figura \ref{fig:isobaro} muestra su diagrama P-V. La expansión reversible de un gas ideal se puede utilizar como ejemplo de un proceso isobárico. De particular interés es la forma en que el calor se convierte en trabajo cuando la expansión se lleva a cabo a diferentes presiones.
+
+\subsection{Procesos isotermos}
+En los procesos que se llevan a cabo a temperatura constante el trabajo lo podemos calcular si consideramos un gas ideal como: 
+\begin{equation}
+    W=\int_1^2 P dV= \int_{(V_1, T_1)}^{(V_2,T_2)}nRT \frac{1}{V}dV=nRT \int_{V_1}^{V_2} \frac{1}{V}dV=nRT \ln \Bigl( \frac{V_2}{V_1} \Bigl)
+\end{equation}
+
+La compresión o expansión de un gas ideal puede llevarse a cabo colocando el gas en contacto térmico con otro sistema de capacidad calorífica muy grande y a la misma temperatura que el gas. Este otro sistema se conoce como foco calórico.
+\\
+
+Para cualquier sistema de forma general se puede escribir la siguiente definición de trabajo
+\begin{formula}
+    \begin{equation}
+        W= -\int Y dX
+    \end{equation}
+\end{formula}
+donde $Y$ es una fuerza generalizada y $X$ un desplazamiento generalizado. 
+\\
+
+Hagamos un breve inciso matemático, y definamos el concepto de forma diferencial exacta antes de continuar con el desarrollo de la primera ley de la termodinámica.
+\begin{definicion}[Forma diferencial exacta]
+    Definimos la forma diferencial $ w=M(x,y) dx+N(x,y)dy$ se dice que es exacta (o integrable) si se verifica que: 
+    \begin{itemize}
+        \item $w=dF$ con $F_1=F(x,y)$
+        \item $\int_{x_1,y_1}^{x_2, y_2}w=F(x_2,y_2)-F(x_1,y_1)$
+        \item $\oint w=0$
+    \end{itemize}
+Si $w$ es exacta cumple la relación de las derivadas cruzadas de Schwartz
+\begin{formula}
+    \begin{equation*}
+    w=dF \rightarrow M= \frac{\partial F}{ \partial x} \quad \text{y} \quad N=\frac{\partial F}{\partial y} \rightarrow \frac{\partial M}{\partial y }=\frac{\partial N}{\partial x}
+\end{equation*}
+\end{formula}
+\end{definicion}
+En el caso del trabajo termodinámico para procesos cuasiestáticos
+\begin{equation}
+    W=\int_1^2P(T,V)dV
+\end{equation}
+expresamos la ecuación térmico de estado 
+\begin{equation}
+    F(T,V,P)=0 \quad V=V(T,P)
+\end{equation}
+podemos escribir la forma diferencial 
+\begin{equation}
+    dV=\Bigl( \frac{\partial V}{\partial T}\Bigl)_P dT+\Bigl( \frac{\partial V}{\partial P}\Bigl)_T dP
+\end{equation}
+lo que usando la definición de trabajo
+\begin{formula}
+    \textbf{\begin{equation}
+    W=\int_1^2 PdV=\int_1^2P \Bigl( \frac{\partial V}{\partial T}\Bigl)_P dT + P \Bigl( \frac{\partial V}{\partial P}\Bigl)_T dP
+\end{equation}}
+\end{formula}
+
+\section{Primer principio de la Termodinámica}
+Para un proceso termodinámico adiabático, el trabajo solo dependerá del punto inicial $\{ a_i\}$ y final $\{ a'_i\}$ sin importar el camino del proceso, podemos considerar que el trabajo es una función de la forma 
+\begin{formula}
+    \begin{equation}
+        W_{ad}=-F(a'_i,a_i)
+    \end{equation}
+\end{formula}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{adiabático.png}
+    \caption{Trabajo para un proceso adiabático}
+    \label{fig:placeholder}
+\end{figure}
+
+$F$ debe ser separable de forma que $F(a'_i,a_i)=U(a'_i)-U(a_i)$ y entonces para cada camino $\gamma$ adiabático podemos escribir
+\begin{equation}
+    W_{ad}=-\Delta U
+     \label{Pre_primer_principio}
+\end{equation}
+donde U es una función de estado y se puede expresar en función de las variables de estado $U=U(P,V,T)$
+\\
+
+De hecho es esta función $U$ quien dota de sentido al trabajo, si fluye trabajo $W_{ad}>0$ fuera del sistema perdemos $U$, si fluye dentro ganamos $U$. Es decir fluye de un sistema a otro dandole sentido físico al concepto de trabajo. Entonces podemos decir que $U$ es la energía intera del sistema. 
+
+\\
+
+\subsection{Concepto de calor}
+Para un proceso no adiábatico definimos el concepto de calor que surge de 
+\begin{equation}
+    W+W_{ad} \rightarrow W-W_{ad}=Q
+    \label{adiabatico}
+\end{equation}
+
+$Q$ es el flujo de energía que intercambia el sistema con el entorno y no está ligado a interacciones internas. Es la parte que pierde $W_{ad}$ por no ser adiabático. 
+
+\subsection{Criterio de signos para el calor}
+Vamos a establecer un criterio de signos para interpretar el trabajo
+\begin{itemize}
+    \item Para $Q<0$ el sistema pierde calor 
+    \item Para $Q>0$ el sistema gana calor
+\end{itemize}
+
+\subsection{Formulación del primer principio}
+Si consideramos un proceso no adiabático como en \ref{adiabatico} en la expresión \ref{Pre_primer_principio} para generalizarlo a cualquier tipo de trabajo podemos considerar, 
+\begin{equation*}
+    W+\Delta U =Q 
+\end{equation*}
+si despejamos la diferencia de energía interna
+\begin{formula}
+    \begin{equation}
+        \Delta U= Q-W
+    \end{equation}
+\end{formula}
+
+\subsection{Formulaciones alternativas y peculiaridades para el primer principio}
+
+Supongamos un sistema $S=S_1 \cup S_2$ con todos sus intercambios de energía posibles como muestra la figura, vamos a demostrar que $U$ es extensiva. 
+\begin{figure}
+    \centering
+\begin{tikzpicture}[
+    % Define un estilo para líneas dibujadas a mano (zig-zag ligero)
+    hand_drawn/.style={
+        decorate, 
+        decoration={
+            zigzag, % Cambia a "random steps" o "bent" para diferentes efectos
+            segment length=3mm, 
+            amplitude=0.5pt
+        }
+    },
+    % Define el estilo de flecha como Stealth para un look más limpio
+    >=Stealth
+]
+
+    % Dibuja el óvalo principal del sistema con estilo "dibujado a mano"
+    \draw[hand_drawn, very thick, fill=gray!20] (0,0) ellipse (3cm and 1.5cm);
+
+    % Dibuja la pared divisoria interna (línea vertical ondulada)
+    \draw[hand_drawn, thick] (0, -1.5cm) -- (0, 1.5cm);
+
+    % Define los subsistemas como nodos para posicionar el texto fácilmente
+    \node[anchor=center] at (-1.5, 0.5) {$S_1$};
+    \node[anchor=center] at (1.5, 0.5) {$S_2$};
+
+    % Añade las interacciones de trabajo W_k y W_i (flechas rojas, estilo a mano)
+    \draw[->, hand_drawn, red, thick] (-2, 1.5) -- (-2.5, 2.2) node[above left] {$W_k$};
+    \draw[->, hand_drawn, red, thick] (2, 1.5) -- (2.5, 2.2) node[above right] {$W_i$};
+
+    % Añade las interacciones de calor Q_k y Q_i (flechas azules, estilo a mano)
+    \draw[->, hand_drawn, blue, thick] (-2, -1.5) -- (-2.5, -2.2) node[below left] {$Q_k$};
+    \draw[->, hand_drawn, blue, thick] (2, -1.5) -- (2.5, -2.2) node[below right] {$Q_i$};
+    
+    % Dibuja las interacciones internas W_i y Q_i (líneas horizontales de color, estilo a mano)
+    \draw[<->, hand_drawn, red, thick] (-0.8, 0.8) -- (0.8, 0.8) node[right, black] {\tiny $W_i$};
+    \draw[<->, hand_drawn, blue, thick] (-0.8, -0.8) -- (0.8, -0.8) node[right, black] {\tiny $Q_i$};
+\end{tikzpicture}
+
+    \caption{Sistema formado por dos subsistemas con interacciones termodinámicas}
+    \label{fig:demos}
+\end{figure}
+
+\begin{proof}
+    Definamos acorde a la figura \ref{fig:demos}:
+    \begin{align*}
+        \Delta U^{(1)}=Q_T+W_T = (Q_{12}+Q_{21})-(W_{21}+W_{12})
+        \\
+        \Delta U^{(2)}=Q_T+W_T = (Q_{21}+Q_{12})-(W_{12}+W_{21})
+    \end{align*}
+como  $Q_{12}=-Q_{21}$ o $W_{12}=-W_{21}$ sumando todo tenemos que
+\begin{equation}
+    \Delta U^{(1)}+  \Delta U^{(2)}=(Q_1+Q_2)-(W_1+W_2)= \Delta U
+\end{equation}
+al depender de la cantidad de materia es intensiva. El criterio de signos es el mismo que para el calor al depender de este. 
+\\
+
+Como $Q$ no es una forma diferencial exacta, esta nueva variable la energía interna tampoco lo es, y por tanto hereda su forma matemática. 
+\end{proof}
+
+Estudiemos un par de ejemplos notables
+\begin{ejemplo}[Sistemas aislados]
+Se trata de un sistema donde $W=0$ y $Q=0$, por lo tanto aplicando el primer principio de la termodinámica tenemos que 
+\begin{equation}
+    \Delta U=0 \rightarrow U \equiv \text{cte}
+\end{equation}
+\end{ejemplo}
+
+\begin{ejemplo}[Proceso Cíclico]
+Tenemos un sistema donde se verifica que \begin{equation}
+    U_2=U_1  \rightarrow\Delta U=0
+\end{equation}
+por lo tanto se verifica que $W=Q>0$, lo que se interpreta como una perdida de energía en el sistema. No es posible construir un movil perpetuo de primera especie. 
+\end{ejemplo}
+\begin{ejemplo}[Procesos isocoros]
+Tenemos que $W=0$ de forma que 
+\begin{equation}
+    \Delta U =Q
+\end{equation}
+definimos una nueva magnitud, el calor a volumen constante.
+\end{ejemplo}
+\section{Definición de Entalpia}
+\begin{definicion}[Entalpia]
+Es una función de estado que se define como
+\begin{formula}
+    \begin{equation}
+        H=U+PV
+    \end{equation}
+\end{formula}
+se mide en julios. 
+\end{definicion}
+Esta nueva magnitud depende del estado del sistema y es extensiva. Para un proceso elemental podemos escribir
+\begin{equation}
+    dH=dU+d(PV)
+\end{equation}
+si consideramos un proceso isobaro y reversible entre dos puntos $(V,P)$ y $(V+dV,P+dP)$ podemos escribir 
+\begin{equation*}
+    dQ=dU +d(PV)
+\end{equation*}
+de la definición de energía interna escribimos
+\begin{equation*}
+    dH=dQ-PdV+d(PV)
+\end{equation*}
+y ahora escribimos 
+\begin{formula}
+    \begin{equation}
+        dH=dQ+VdP
+    \end{equation}
+\end{formula}
+si $dP=0$, podemos escribir
+\begin{equation}
+    \Delta H=Q_p
+\end{equation}
+\\
+
+En general, si consideramos un proceso $\gamma$ cualquiera (cuasiestático o no) entre dos estados de igual presión podemos escribir
+\begin{equation}
+    \Delta H=H_2-H_1=(U_2+P_2V_2)-(U_1+P_1V_1)
+\end{equation}
+y como la presión es la misma $P_{ext}$
+\begin{equation}
+    \Delta H= (U_2-U_1)+PV_2-PV_1=\Delta U+P\Delta V
+\end{equation}
+aplicando el primer principio de la termodinámica para un proceso isóbaro, recuperamos al definción de calor a presión constante
+\\
+
+De manera general podemos dar la siguiente definición, 
+\begin{definicion}[Entalpía]
+    Para un sistema genérico que pueda intercambiar trabajo en base a las variables conjugadas $(y,x)$ se define la entalpía como
+    \begin{formula}
+        \begin{equation}
+            H=U-yX
+        \end{equation}
+    \end{formula}
+\end{definicion}
+
+
+\chapter{Determinación de la ecuación térmica y energética de estado. Coeficientes termodinámicos y calorimétricos. Transformaciones politrópicas}
+Supongamos una masa de gas contenida en un recipiente entonces podremos determinar su presión volumen y temperatura. Fijando dos de estas variables podremos determinar la tercera usando la ecuación térmica de estado. En general, para estados de equilibrio del sistema podemos escribir
+\begin{equation}
+    f(T,x,y)=0 \rightarrow y=y(T,x)
+\end{equation}
+\section{Ecuación de estado para un sistema simple}
+\subsection{Ecuación de estado para un gas ideal}
+Definamos el volumen molar como \begin{equation}
+   v=\frac{V}{n}
+\end{equation}
+con $n$ el número de moles. Su ecuación térmica de estado será de la forma $f(p,v,T)=0$. Los datos  experimentales nos permiten deducir que para presiones bajas tenemos que
+\begin{equation}
+    \lim_{p \to 0} \frac{pV}{T}=R=8,315 \text{ J/Kmol}
+\end{equation}
+y en estas condiciones recuperamos la ecuación de los gases ideales, De forma que llegamos a 
+\begin{formula}
+    \begin{equation}
+        pV=nRT
+    \end{equation}
+\end{formula}
+\subsection{Ecuación de estado para un gas real. Ecuación de Van der Walls}
+La probabilidad de colisión es proporcional a los choques que se producen entre dos particulas de esa forma
+\begin{equation}
+    \text{p.colisión} \propto p^2 \propto \rho
+\end{equation}
+y que es directamente proporcional a la densidad de forma que a más particulas encerradas en un menor volumen se producen más colisiones
+\begin{formula}
+    \begin{equation}
+        \text{p.colisión} =a p^2 = a (V/n)^2
+    \end{equation}
+con $a$ una constante que dependende del gas estudiado. 
+\end{formula}
+Si además definimos una constante $b$, el covolumen, definida por le volumen que ocupa un mol de molécula de gas. Podemos llegar a la ecuación de Van der Walls
+\begin{formula}
+    \begin{equation}
+        \Bigl(p+\frac{a}{v^2}\Bigl)(v-b)=kT
+    \end{equation}
+\end{formula}
+tenemos aquí una corrección a la ley de los gases ideales que aproxima más el modelo al caso real. En estet tema estudiaremos justamente esto, como podemos corregir la ecuación de los gases ideales para acercarnos al caso real. 
+\section{Obtención de los coeficientes termodinámicos}
+Los coeficientes termodinámicos son correcciones realizadas sobre la ley de los gases ideales para aproximarlas mejor al caso real
+\subsection{Coeficiente de dilatación}
+\begin{definicion}[Coeficiente de dilatación]
+Para un sistema expansivo, definimos
+\begin{formula}
+    \begin{equation}
+    \alpha=\frac{1}{V}\Bigl( \frac{\partial V}{\partial T}\Bigl)_p
+\end{equation}
+\end{formula}
+expresado en $\text{K}^{-1}$
+\end{definicion}
+Para un gas ideal, se reduce a 
+\begin{equation}
+    \alpha=\frac{1}{V}\Bigl( \frac{\partial V}{\partial T}\Bigl)_p= \frac{1}{V}\frac{nR}{P}=\frac{P}{nRT}\frac{nR}{P}= \frac{1}{T} \rightarrow \alpha=\frac{1}{T}
+\end{equation}
+en un intervalo cualquiera de temperatura donde $\alpha$ se pueda considerar constante tenemos que 
+\begin{equation*}
+    \alpha = \frac{1}{V} \Bigl(  \frac{\partial V}{\partial T}\Bigl)_P = \frac{1}{V} \Bigl( \frac{dV}{dT} \Bigl)_{P} \rightarrow \int_1^2  \alpha dT = \int_1^2 \frac{dV}{v} \rightarrow \alpha(T_2-T_1)= \ln\frac{V_2}{V_1} \rightarrow \alpha \Delta T = \ln\Bigl(1+ \frac{\Delta V}{  V_1}\Bigl)
+\end{equation*}
+$\Delta V$ se supone pequeño por lo que podemos hacer un desarrollo de MacLaurin en el segundo término, 
+\begin{equation*}
+    \ln(1+x)= x- \frac{x^2}{2}+\frac{x^3}{3}-...= \sum_{n=1}^\infty (-1)^{n+1} \frac{x^n}{n}
+\end{equation*}
+con lo que resulta que 
+\begin{equation}
+    \alpha(T_2-T_1)=\frac{\Delta V}{V_1} \rightarrow \Delta V= \alpha V_1 \Delta T \rightarrow V_2=V_1 (1+\alpha(T_2-T_1))
+\end{equation}
+De forma general, 
+\begin{formula}
+    \begin{equation}
+        \alpha=\frac{1}{X}\Bigl( \frac{\partial X}{\partial  T}\Bigl)_{y}
+    \end{equation}
+\end{formula}
+\subsection{Coeficiente de comprensibilidad isotermo}
+\begin{definicion}
+    Se define para un sistema expanisvo como 
+    \begin{formula}
+        \begin{equation}
+            \kappa_T= - \frac{1}{V} \Bigl( \frac{\partial V}{\partial p}\Bigl)_{T}
+        \end{equation}
+    \end{formula}
+\end{definicion}
+para un gas ideal su expresión se reduce a 
+\begin{equation}
+    K_T= \frac{1}{P}
+\end{equation}
+Estudiemos un caso particular 
+\begin{equation}
+    K_S=-\frac{1}{V} \Bigl( \frac{\partial V}{\partial p}\Bigl)_{adiab}= \frac{1}{V} \Bigl( \frac{ \partial V}{\partial p }\Bigl)_S
+\end{equation}
+donde el subíndice $S$ representa un proceso isentrópico (la entropia permanece constante)
+
+\subsection{Coeficiente piezotérmico}
+\begin{definicion}[Coeficiente piezotérmico]
+    Definimos $\beta$ como 
+\begin{formula}
+    \begin{equation}
+        \beta = \frac{1}{P} \Bigl( \frac{\partial P}{\partial T}\Bigl)_V
+    \end{equation}
+\end{formula}
+\end{definicion}
+
+El valor de estos coeficientes dependera de la faciliadad del sistema para comprimerse (o dilatarse)
+Para solidos y liquidos $K_T$ y $\alpha$ son bastante bajos (del orden de $K_T \sim 10^{-7}$ y $\alpha \sim 10^{-5}$)
+
+\subsection{Relación entre coeficientes}
+Si tomamos la siguiente igualdad directamente de aplicar la definición de cada uno de los indices podemos escribir la siguiente igualdad
+\begin{formula}
+    \begin{equation}
+        \Bigl( \frac{\partial p }{ \partial T}\Bigl)_V \Bigl(\frac{\partial T}{\partial V}
+        \Bigl)_p \Bigl(\frac{\partial V}{\partial p} \Bigl)_T =-1 \xrightarrow{\text{def 4.2}} p \beta(-\kappa_TV)\frac{1}{\alpha V}=-1 \rightarrow\alpha=p\beta \kappa_T
+    \end{equation}
+\end{formula}
+Ahora bien, conociendo la relación entre los coeficientes usemoslos para expresar el diferencial de volumen. Tenemos entonces que 
+\begin{formula}
+    \begin{equation}
+        dV= \Bigl(\frac{\partial V}{\partial T}\Bigl)_p dT + \Bigl(\frac{\partial V}{\partial p} \Bigl)_T dp= \alpha V dT-\kappa_T \rightarrow\frac{dV}{V}= \alpha(p,T)dT- \kappa_T dp
+        \label{dV_coefs}
+    \end{equation}
+\end{formula}
+Y ahora usando la ecuación \ref{dV_coefs} podemos escribir el trabajo intercambiado por un sistema expansivo en un proceso cuasiestático de forma que 
+\begin{equation}
+    \delta W = pdV= p(\alpha V dT-\kappa_TVdp)=pV(\alpha dT-\kappa_Tdp)
+\end{equation}
+para un gas ideal esta expresión se reduce a 
+\begin{equation}
+    \delta W= pdV= nRTdT-Vdp
+\end{equation}
+\subsection{Ecuación de estado usando coeficientes termodinámicos}
+Trabajamos con una serie de ejemplos de distintos procesos donde buscamos obtener una expresión para el trabajo que realizan, podemos usar los coeficientes definidos a lo largo de este punto para ello.
+\begin{ejemplo}[Proceso isotermo ($dT=0$)]
+Escribimos la siguiente expresión usando la definición de trabajo 
+\begin{equation}
+    W=-\int_{(T_1,p)}^{(T_2,p)}pV_0 \kappa_T dP= -\frac{1}{2}V_0 \kappa_T (p_2^2-p_1^2)= -\frac{1}{2}V_0 \kappa_T \Delta p^2
+\end{equation}
+\begin{ejemplo}[Proceso isobaro ($dp=0$)]
+Al igual que en el ejemplo anterior podemos escribir 
+\begin{equation}
+    W=\int_{(T_1,p)}^{(T_2,p)}pV_0 \alpha dT = PV_0 \alpha \int_{T_1}^{T_2}dT=pV_0 \alpha \Delta T
+\end{equation}
+\end{ejemplo}   
+\end{ejemplo}
+
+Y ahora hagamos un problema de ejemplo 
+\begin{ejemplo}
+    Un lıquido tiene coeficientes de dilatacion y compresion isoterma $\alpha$ y $κ_T$ constantes. Demuestra que su ecuación de estado puede expresarse como:
+    \begin{equation}
+        V=\alpha V_0 T +k_TV_0p=\text{cte.}
+\end{equation}
+\begin{proof}
+    Con las definiciones vistas anteriormente acerca de estos coeficientes, si escribimos la diferencial totwual de $V$ tenemos que
+    \begin{equation*}
+        dV=\Bigl(\frac{\partial V}{\partial T} \Bigl)_p dT+ \Bigl(\frac{\partial V}{\partial p }\Bigl)_T dp
+    \end{equation*}
+    y sustituyendo los coeficientes $\alpha$ y $\kappa_T$ podemos reescribrilo como 
+    \begin{equation*}
+        dV=(\alpha V)dT-(\kappa_TV)dp
+    \end{equation*}
+    dividimos por $V$ para separar las variables y llegamos a
+    \begin{equation*}
+        \frac{dV}{V}=\alpha dT-\kappa_Tdp
+    \end{equation*}
+    integramos desde un estado inicial $(V_0,T_0,p_0)$ hasta un estado $(V,T,p)$ y tenemos que
+    \begin{equation*}
+        \int_i^f \frac{dV}{V}=\int_i^f \alpha dT-\kappa_Tdp
+    \end{equation*}
+    como los coeficientes son constantes los sacamos de la integral y llegamos a 
+    \begin{equation*}
+        \ln(V)-\ln(V_0)= \alpha(T-T_0)-\kappa_T(p-p_0)
+    \end{equation*}
+    si reescribimos $V/V_0$ como $1+(V-V_0)/V_0=1+\Delta V/V_0$ podemos escribrir
+    \begin{equation*}
+        \ln\Bigl( 1+\frac{\Delta V}{V_0}\Bigl)=\alpha \Delta T- \kappa_T \Delta p 
+    \end{equation*}
+    si usamos la aproximación para variaciones de volumenes pequeña, podemos hacer un desarrollo de Taylor que nos deje con $\ln(1+x) \approx x$ de forma que podemos escribir una nueva expresión
+    \begin{equation*}
+        \frac{V-V_0}{V_0} \approx \alpha(T-T_0)- \kappa_T(p-p_0)
+    \end{equation*}
+    multiplicando por $V_0$
+    \begin{equation*}
+        V-V_0= \alpha V_0T- \alpha V_0T_0-\kappa_TV_0p +\kappa_TV_0p_0
+    \end{equation*}
+    reorganizando se puede dejar todas las variables a un lado del igual 
+        \begin{equation}
+        V=\alpha V_0 T +k_TV_0p=\text{cte.}
+    \end{equation}
+\end{proof} 
+\end{ejemplo}
+
+\section{Coeficientes calorímetricos}
+Para un sistema de variables $\{ P,V,T\}$ se puede considerar como variables de estado a cualquier combinación de dos de ellas, las llamaremos genéricamente $(x,y)$. Ahora, supongamos que tenemos un sistema que evoluciona de forma que 
+\begin{equation*}
+    (x,y) \rightarrow(x+dx,y+dy)
+\end{equation*}
+según el primer principio de la termodinámica se tiene que 
+\begin{equation*}
+    \delta Q=dU+PdV
+\end{equation*}
+con $V=V(x,y)$ y $U=U(x,y)$ y dado que tenemos que $dV$ y $dU$ son formas diferenciales exactas podemos escribir este principio como: 
+\begin{equation}
+    \delta Q=dU+PdV= \Bigl( \Bigl( \frac{\partial U}{\partial x}\Bigl)_ydx+\Bigl(\frac{\partial U}{\partial y}\Bigl)_x dy\Bigl) +P\Bigl(\Bigl(\frac{
+\partial V}{\partial x} \Bigl)_x dx + \Bigl(\frac{
+\partial V}{\partial y} \Bigl)_y dy \Bigl) 
+\end{equation}
+y de la ecuación anterior si agrupamos cada término con su diferencial
+\begin{equation}
+\delta Q=  \Bigl( \Bigl( \frac{\partial U}{\partial x}\Bigl)_y +P\Bigl(\frac{
+\partial V}{\partial x} \Bigl)_y \Bigl) dx + \Bigl( \Bigl( \frac{\partial U}{\partial y}\Bigl)_x +P\Bigl(\frac{
+\partial V}{\partial y} \Bigl)_x \Bigl) dy 
+\end{equation}
+Finalmente, los términos que acompañan tanto a $dx$ como a $dy$ se reescribirá de la forma:
+\begin{equation}
+    \delta Q= A(x,y) dx+B(x,y)dy 
+\end{equation}
+siendo estas dos funciones $A(x,y)$ y $B(x,y)$ los coeficientes calorimétricos. 
+\begin{nota}
+    Al no ser el calor una forma diferencial exacta no se cumple la igualda de las derivadas parciales para estos coeficientes
+\end{nota}
+A continuación, buscamos particularizar las variables de estado para acabar obteniendo todos los coeficientes de estado. 
+\begin{enumerate}
+    \item Si consideramos $x=T$ y $y=V$ tenemos que: 
+    \begin{definicion}[Coeficiente calorimétrico a volumen constante ($C_V$)]
+    \begin{equation}
+        A(T,V)= \Bigl( \frac{\delta Q}{dT} \Bigl)_V=\Bigl( \frac{\partial U}{\partial T}\Bigl)_V + p\Bigl(\frac{\partial V}{\partial T}\Bigl)_V= \Bigl( \frac{\partial U}{\partial T} \Bigl)_V=C_V
+    \end{equation}    \end{definicion}
+    \begin{definicion} [Coeficiente Calorimétrico de Dilatación Isotermo ($l$)]
+    \begin{equation}
+        B(T,P)=  \Bigl( \frac{\delta Q}{dP} \Bigl)_T=  \Bigl(\frac{\partial U}{\partial V} \Bigl)_T+P\Bigl(\frac{\partial V}{\partial V} \Bigl)_T=  \Bigl(\frac{\partial U}{\partial V} \Bigl)_T+P
+    \end{equation}
+        
+    \end{definicion}
+    \item  Si tomamos $x=T$ e $y=P$ tenemos que: 
+    \begin{definicion}[Coeficiente calorimétrico a presión constante]
+    \begin{equation} 
+        A(T,P)= \Bigl(\frac{\delta Q}{dT} \Bigl)_P = \Bigl(\frac{\partial U}{\partial T}\Bigl)_P +P \Bigl(\frac{\partial V}{\partial T}\Bigl)_P= \Bigl(\frac{\partial U}{\partial T}\Bigl)_P+ \Bigl(\frac{\partial VP}{\partial T}\Bigl)_P = \Bigl(\frac{\partial H}{\partial T}\Bigl)_P=C_p
+    \end{equation}
+    \begin{nota}
+    Si introducimos $P$ en el segundo término (es constante) recuperamos la definición de entalpía
+    \begin{equation*}
+        H=U+PV
+    \end{equation*}
+    \end{nota}
+    \end{definicion}
+    \begin{definicion}[Coeficiente calorimétrico de compresión isotermo ($h$)]
+    \begin{equation}
+        B(T,P)= \Bigl( \frac{\delta Q}{dP} \Bigl)_T= \Bigl(\frac{\partial U}{\partial P} \Bigl)_T+P \Bigl(\frac{\partial V}{\partial P}\Bigl)_T = h
+    \end{equation}
+    \end{definicion}
+    \item Si $x=V$ e $y=P$ se tiene que: 
+    \begin{definicion}[Coeficiente calorímetrico de dilatación isobárico ($\lambda$)]
+    \begin{equation}
+    A(V,P)=\Bigl(\frac{\delta Q}{dV} \Bigl)_P= \Bigl(\frac{\partial U}{\partial V} \Bigl)_P +P\Bigl(\frac{\partial V}{\partial V}\Bigl)_P= \Bigl( \frac{\partial U}{\partial V}\Bigl)_p+ P=\lambda
+    \end{equation}    
+    \end{definicion}
+\begin{definicion}[Coeficiente Calorimétrico de Compresión Isocórico ($\mu$)]
+\begin{equation}
+    B(V,P)= \Bigl(\frac{\delta Q}{dP} \Bigl)_V=\Bigl( \frac{\partial U}{\partial P}\Bigl)_V+P\cdot\Bigl(\frac{\partial V}{\partial P}\Bigl)_V= \Bigl( \frac{\partial U}{\partial P}\Bigl)_V=\mu
+\end{equation}
+\end{definicion}
+\end{enumerate}
+Cabe recalcar que no todos los coeficientes calorímetros son independientes, podemos expresar el calor como, 
+\begin{align}
+    \delta Q=C_V \hspace{2pt}dT+l \hspace{2pt}dV
+    \\
+     \delta Q=C_P\hspace{2pt}dT+h \hspace{2pt}dP
+     \\
+      \delta Q=\lambda\hspace{2pt}dT+\mu\hspace{2pt}dV
+\end{align}
+Y ahora vamos a relacionarlos entre si, si recuperamos la expresión: 
+\begin{equation}
+    dV=V(\alpha(P,T)\hspace{2pt}dT)-\kappa_T(P,T) \hspace{2pt} dP)
+\end{equation}
+y sustituimos en la expresión del calor tenemos
+\begin{equation}
+\delta Q=C_V \hspace{2pt} dT+l(V\alpha dT-V\kappa_TdP)=(C_V+lV\alpha)dT-(V\kappa_T)dP
+\end{equation}
+que podemos identificar con la segunda expresión del calor de forma que tenemos
+\begin{equation*}
+    (C_V+lV\alpha)dT-(V\kappa_T)dP=C_P \hspace{2pt} dT+h \hspace{2pt} dP
+\end{equation*}
+Se obtiene entonces la siguiente relación
+\begin{equation*}
+    \begin{cases}
+        (C_v+lV\alpha)=C_p
+        \\
+        -V\kappa_T=h
+    \end{cases}
+\end{equation*}
+De donde finalmente se obtienen la siguientes expresiones
+\begin{formula}
+    \begin{equation}
+        l=(C_P-C_V)\frac{1}{V\alpha}
+    \end{equation}
+\end{formula}
+y para $h$
+\begin{formula}
+    \begin{equation}
+        h=(C_V-C_P)\frac{\kappa_T}{\alpha}
+    \end{equation}
+\end{formula}
+De forma similar con la tercera expresión del calor podemos escribir 
+\begin{equation}
+    \delta Q=\lambda dV+\mu dP=\lambda(V\alpha dT-V\kappa_TdP)+\mu dP=\lambda V\alpha\hspace{2pt}dT+(\mu-\lambda V \kappa_T)\hspace{2pt}dP
+\end{equation}
+y si ahora igualamos con la expresión anterior tenemos: 
+\begin{equation*}
+    \lambda V \alpha \hspace{2pt} dT+(\mu-\lambda V\kappa_T)dP
+\end{equation*}
+Y obtenemos entonces
+\begin{equation*}
+    \begin{cases}
+        \lambda V \alpha=C_p
+        \\
+        (\mu-\lambda V\kappa_T)=h
+    \end{cases}
+\end{equation*}
+De aqui, finalmente se obtiene que 
+\begin{formula}
+    \begin{equation}
+        \lambda=C_p\frac{1}{V \alpha}
+    \end{equation}
+\end{formula}
+y para $\mu$
+\begin{formula}
+    \begin{equation}
+        \mu=C_V\frac{\kappa_T}{\alpha}
+    \end{equation}
+\end{formula}
+
+\begin{nota}
+    Para determinar todos los coeficientes calorimétricos basta con conocer $\alpha,\kappa_T,C_P  \text{ y }C_v$. Si conocemos la ecuación termica de estado y la ecuación energética de estado podemos conocer el comportamiento completo del sistema.
+\end{nota}
+\section{Transformaciones politrópicas}
+Propongamos un sistema con variables termodinámicas $\{P,V,T\}$ que evoluciona cuasiestáticamente manteniendo sus valores específicos constantes de un estado inicial (por simplicidad, 1) a un estado final (por simplicidad, 2). Esta evolución vendra dada por un proceso genérico $\Gamma$:
+\begin{equation*}
+    \text{Estado 1} \equiv(V,P) \rightarrow \text{Estado 2} \equiv(V+dV,P+dP)
+\end{equation*}
+Recapitulemos, para un proceso genérico se tiene la siguiente ecuación térmica de estado: 
+\begin{equation}
+    dV=V\alpha \hspace{2pt}dT-V\kappa_T \hspace{2pt} dP
+\end{equation}
+Y del apartado anterior hemos conseguido las siguientes expresiones para obtener $\delta Q$
+\begin{align}
+    \delta Q= C_VdT+(C_P-C_V)\frac{1}{V\alpha}dV
+    \\
+    \delta Q=C_P dT+(C_V-C_P)\frac{\kappa_T}{\alpha}dP
+    \\
+    \delta Q=C_P\frac{1}{V\alpha} dV+C_V\frac{\kappa_T}{\alpha}dP
+\end{align}
+
+Para un proceso genérico $\Gamma$ la capacidad calorífica de dicho proceso se define como
+\begin{formula}
+\begin{definicion}[Capacidad calorífica para un proceso $\Gamma$]
+\begin{equation}
+C_{\Gamma}=\lim_{\Delta T \rightarrow0} \Bigl(\frac{Q}{\Delta T}\Bigl)_{\Gamma}=\Bigl(\frac{\delta Q}{dT}\Bigl)_{\Gamma}
+\end{equation}    
+\end{definicion}    
+\end{formula}
+
+
+Por lo tanto, considerando como variables de estado $V$ y $P$ se tiene que: 
+\begin{equation*}
+    C_{\Gamma}=\frac{\delta Q}{dT} \rightarrow\delta Q= C_{\Gamma}\hspace{2pt}dT
+\end{equation*}
+Volvemos a retomar la ecuación térmica de estado para obtener una expresión de $dT$: 
+\begin{equation*}
+    dT=\frac{1}{V\alpha}dV+ \frac{\kappa_T}{\alpha}dP
+\end{equation*}
+Si elegimos la siguiente expresión para $\delta Q$ podremos despejar los diferenciales
+\begin{equation*}
+    \delta Q=C_{\Gamma}\frac{1}{V \alpha}dV+C_{\Gamma}\frac{\kappa_T}{\alpha}dP
+\end{equation*}
+Si igualamos ambas expresiones podemos llegar a 
+\begin{equation*}
+    \delta Q=C_{\Gamma}\frac{1}{V \alpha}dV+C_{\Gamma}\frac{\kappa_T}{\alpha}dP=C_P\frac{1}{V \alpha}dV+C_V\frac{\kappa_T}{\alpha}dP
+\end{equation*}
+y reagrupando podemos llegar a definir un nuevo coeficiente
+\begin{equation*}
+    (C_\Gamma-C_V)\frac{\kappa_T}{\alpha}dP=(C_P-C_{\Gamma})\frac{1}{V \alpha}dV
+\end{equation*}
+Finalmente agrupando diferenciales, 
+\begin{equation*}
+\Bigl(\frac{dP}{dV}\Bigl)_\Gamma=-\Bigl( \frac{C_P-C_\Gamma}{C_V-C_{\Gamma}}\Bigl)\frac{1}{V\kappa_T}=-\gamma\frac{1}{V\kappa_T}
+\end{equation*}
+llegamos a la siguiente definición 
+
+\begin{formula}
+\begin{definicion}[Coeficiente de Politropia para un proceso $\Gamma$ o 
+Índice de Politopía]
+\begin{equation}
+    \gamma=\Bigl(\frac{C_P-C_{\Gamma}}{C_V-C_\Gamma}
+    \Bigl)
+\end{equation}
+\end{definicion}
+\end{formula}
+Este indice nos permite escribir la siguiente relación en referencia a los procesos politropicos y es que ocurre que
+\begin{formula}
+    \begin{equation}PV^{\gamma}=\textbf{cte}
+    \end{equation}
+\end{formula}
+
+
+\chapter{Segundo Principio de la Termodinámica. Introducción a las Maquinas Térmicas}
+De acuerdo al primer principio de la Termodinámica, sabemos que no puede existir ningún proceso que contradiga el principio de conservación de la energía. No obstante, este principio no impone restricciones sobre el sentido en el que puede evolucionar un sistema. Por ejemplo podemos considerar las siguientes transformaciones reales: 
+\begin{itemize}
+    \item \textbf{Conversión de la energía cinética en calor:} Supongamos una rueda girando a una determinada velocidad (con una energía cinética asociada) se frena debido al rozamiento con otro sistema. La energía cinética se convierte en calor, que se almacena en el sistema de freno y en la propia rueda, aumentando su temperatura.
+    \item \textbf{Expansion de un gas ideal:} Un gas ideal encerrado en un recipiente se expande en contra del vacío, manteniendo su temperatura constante. En este proceso, el volumen aumenta y su presión disminuye
+\end{itemize}
+Y ahora consideremos las siguientes trasformaciones en sentido contrarias
+\begin{itemize}
+    \item La rueda y el sistema de frenado se enfriarián y la rueda comenzaria a girar hasta alcanzar su veocidad inicial,$v_0$, recuperando su energía cinética,
+    \item El gas se comprime de manera espontánea hasta alcanzar su volumen inicial, dejando vacío el recinto al que se había expandido.
+\end{itemize}
+Estos procesos inversos no ocurren de manera espontánea, aunque no violan el primer principio de la Termodinámica. Esta falta de simetría en el sentido de la evolución es el objetivo del segundo principio de la Termodinámica. 
+\\
+Este segundo principio nos da información acerca del sentido en el que evolucionará espontáneamente un sistema termodinámico dado. 
+\section{Maquinas térmicas}
+Consideremos un sistema que intercambia calor con una fuente térmica mediante un proceso cíclico. Aplicamos el primer principio de la Termodinámica, y se cumple que
+\begin{equation*}
+    \Delta U=0 \rightarrow Q=W
+\end{equation*}
+Esta igualdad nos indica que: 
+\begin{enumerate}
+    \item Si $Q=W<0$ el sistema recibe trabajo y cede calor. Por ejemplo, un sistema mecánico con fuerzas disipativas.
+    \item Si $Q=W>0$ el sistema recibe calor y relaiza un trabajo. Este caso describe un movil perpetuo de segunda especie, cuya exixtencia imposibilita el segundo principio de la Termodinámica que veremos justo a continuación.
+\end{enumerate}
+Estos hechos nos conducen al siguiente enunciado: 
+\begin{formula}
+    \begin{ley}[Enunciado de Kelvin-Planck (I)]
+    No es posible la existencia de una transformación termodinámica cuyo único efecto sea la obtención de calor de un solo foco calorífico y la realización de una cantidad equivalente de trabajo.
+    \end{ley}
+    \begin{ley}[Enunciado de Kelvin-Planck (II)]
+    No es posible la existencia de una transformación termodinámica cíclica en la que se absorba calor de un soslo foco calorífico y se realice una cantidad equivalente de trabajo
+    \end{ley}
+\end{formula}
+
+ Este principio no imposibilita la existencia de un sistema que realice un proceso en el que se absorba una cantidad de calor de un solo foco y la transforme íntegramente en trabajo, niega que tal transformación puede realizarse de forma cíclica. 
+ Presentemos una serie de ejemplos para el intercambio de calor.
+\begin{ejemplo}
+Diferenciemos tres casos donde se imposibilita el intercambio de calor de acuerdo el enunciado de Kelvin-Planck:
+    \begin{itemize}
+        \item Si tenemos $Q_1,Q_2>0$. El sisteme absorbe calor de ambos focos. Podriamos introducir un nuevo foco a temperatura $T_3>T_1>T_2$ de forma que el proceso se pueda realizar usando un único foco térmico lo que iría en contra del principio. Se trata de una maquina anti-Kelvin-Planck como se ve en Fig: \ref{fig:MaK1}
+ 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{MaK1.png}
+    \caption{Ejemplo de Maquina anti-Kelvin para el primer caso}
+    \label{fig:MaK1}
+\end{figure}
+
+\item Supongamos ahora que $Q_1<0$ y $Q_2>0$. El sistema absorbe calor de un foco frio y cede calor a un foco caliente. Como podemos ver es posible introducir un nuevo foco, con el cual el proceso sería igualmente monotermo, y violaria el enunciado de Kelvin-Planck. Lo vemos representado en la figura \ref{fig:MaK2}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{MaK2.png}
+    \caption{Ejemplo de Maquina anti-Kelvin para el segundo caso}
+    \label{fig:MaK2}
+\end{figure}
+
+\item Supongamos ahora el caso contrario, es decir los calores intercambiados tienen el signo contrario en el siguiente caso, absorbiendo calor del foco caliente y cediendolo al foco frio. Buscamos al igual que en los casos anteriores sustituir ambos focos por uno solo, debe verificarsse entonces simultaneamente que $T_1<T_3$ y que $T_2<T_3$. Por lo tanto, se viola el enunciado K-P, como se ve en la figura \ref{fig:MaK3}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{MaK3.png}
+    \caption{Ejemplo de Maquina anti-Kelvin para el tercer caso}
+    \label{fig:MaK3}
+\end{figure}
+   \end{itemize}
+\end{ejemplo}
+\subsection{Rendimeinto de una máquina térmica}
+Como hemos dicho, una maquina térmica es un sistema que operando de forma cíclica, absorbe calor de un foco caliente para ceder parte a un foco frio y convirtiendo la diferencia en trabajo. 
+Podemos definir el rendiemiento de una maquina térmica como: 
+\begin{equation}
+    \eta=\frac{W}{Q_1}
+\end{equation}
+es decir, se trata de un cociente entre el trabajo que obtenemos y el calor que hemos absorbido. Utilizando el primer principio de la termodinámica, podemos escribrir que al ser un ciclo: 
+\begin{equation}
+    \Delta U=0 \rightarrow Q_1+Q_2=W \rightarrow\eta=\frac{Q_1+Q_2}{Q_1}=1-\frac{|Q_2|}{Q_1}
+\end{equation}
+Como por el enunciado de Kelvin-Planck, $Q_2\neq0$, el rendimiento de una maquina térmica se define menor estricto que 1.
+
+\section{Máquinas frigoríficas}
+Si invertimos el proceso de una máquina térmica, obtenemos una máquina frigorífica, cuyo objetivo es transferir calor desde un foco frio a uno caliente, consumiendo un trabajo externo. De acuerdo con el primer principio de la Termodinámica: 
+\begin{equation}
+    Q_1+Q_2=W \rightarrow -|Q_1|+Q_2=W \rightarrow|W|=|Q_1|-Q_2
+\end{equation}
+Podemos entonces definir la eficiencia de una máquina frigorífica como el siguiente cociente:
+\begin{equation}
+    e=\frac{Q_2}{|W|}=\frac{Q_2}{|Q_1|-Q_2}
+\end{equation}
+Para un trabajo nulo $W=0$ obtendriamos una eficiencia infinita, lo que implicaría una transferencia espontánea de calor desde un foco frío a uno caliente, este hecho conduce al siguiente enunciado del siguiente principio: 
+\begin{formula}
+    \begin{ley}[Enunciado de Clausisus(I)]
+    No es posible la existencia de una transformación termodinámica cuyo único efecto sea la transferencia de calor de un foco frío a otro caliente
+    \end{ley}
+    \begin{ley}[Enunciado de Clausius (II)]
+    No es posible la existencia de una transformación termodinámica cíclica en la que, sin el consumo de un trabajo externo, se absorba calor de un foco frío y se ceda una cantidad equivalente de calor a otro caliente. 
+    \end{ley}
+\end{formula}
+Es decir se imposibilita la transferencia de calor de un foco frio a uno caliente. 
+
+\section{Equivalencia entre ambos enunciados}
+Buscamos demostrar que ambos enunciados son equivalentes. Para ello, supongamos que el enunciado de Kelvin-Planck es falso; entonces, seria posible construir una máquina térmica que absorba calor de un único 
+foco calorífico y lo convierta de forma integra en trabajo. Supongamos ahora que utilizamos el trabajo generado por esta máquina térmica para alimentar una máquina frigorifica que opera entre dos temperaturas $T_1$ y $T_2$, esta máquina frigorifica extrae una cantidad de calor $Q_2$ del foco frio y lo transfiere a un foco caliente sin violar ninguno de los enunciados por si sola. 
+\\
+Sin embargo, el conjunto de ambas máquinas, como se puede ver en \ref{fig:demo_compatible}
+que como único efecto y de forma cíclica, transfiere calor desde un foco frio a uno caliente violando el enunciado de Clausius.  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{demo_equiv.png}
+    \caption{Una maquina anti-Kelvin indica también que se viola Clauisus}
+    \label{fig:demo_compatible}
+\end{figure}
+
+Supongamos ahora que el enunciado de Clausius es falso. Este enunciado establece la imposibilidad de que un sistema que opera de forma cíclica, transfiera calor de un cuerpo frío a uno caliente sin hacer uso de un trabajo. Es decir, si este enunciado fuera falso sería construir un sistema que transfiera calor desde un foco frío a uno caliente sin realizar trabajo. 
+Supongamos que colocamos una máquina térmica que opera entre estos dos focos absorbiendo una cantidad de calor $Q_1$  y que la transformamos íntegramente en trabajo. Es decir, una maquina como la que encontramos en la figura \ref{fig:demo_equiv2}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{demo_equiv2.png}
+    \caption{Una maquina anti-Clausisus deriva en una máquina anti-Kelvin}
+    \label{fig:demo_equiv2}
+\end{figure}
+
+Entonces hemos demostrado que ambos enunciados son equivalentes y por lo tanto podremos usar uno y otro dependiendo de nuestra conveniencia.
+
+\section{Irreversibilidad}
+El segundo principio de la Termodinámica se vincula directamente con el concepto de proceso reversible. 
+Considerando un sistema termodinamico $S$, inicialmente en un estado de equilibrio $S_1$ y en contacto con una fuente térmica $F$ en el estado $F_1$, y rodeado por un medio externo. Supongamos que el sistema evoluciona a un nuevo estado de equilibrio $S_2$, intercambiando con la fuente una cantidad de calor $Q$, que pasa al estado $F_2$ y una cantidad de trabajo $W$ con el medio externo que alcanza un nuevo estado de equilibrio. Nos surge ahora la necesidad de definir cuando un proceso es reversible. 
+\begin{formula}
+    \begin{definicion}[Proceso reversible]
+    Un proceso es reversible si es posible realiar el proceso inverso de modo que tanto, el sistema, como la fuente térmica y el medio externo retornan a sus estados iniciales respectivamente sin provocar ninguna modificación en el universo. 
+    \end{definicion}
+\end{formula}
+Cuando no logramos cumplir alguna de estas condiciones el proceso es irreversible. A continuación detallamos las causas de estas irreversibilidad
+\subsection{Irreversibilidad mecánica externa}
+Este tipo de irreversibilidad surge cuando el trabajo realizado sobre un sistema se convierte en energía interna o calor debido a procesos disipativos como el rozamiento, la viscosidad o la resistencia eléctrica.
+Podemos distinguir: 
+\begin{itemize}
+    \item \textbf{Irreversibilidad mecánica externa isoterma:} en un sistema en contacto con una fuente térmica, si se realiza un trabajo sobre el sistema y existen procesos disipativos, parte de ese trabajo se transforma en un calor que es absorbido por la fuente térmica, para poder revertirlo se deberia extraer y convertirlo nuevamente en trabajo de forma integra, lo qiue violaría el enunciado de Kelvin-Planck
+    \item \textbf{Irreversibilidad mecánica externa adiabática:} Al estar el sistema aislado, si se realiza un trabajo sobre el sistema y existen procesos disipativos el calor generado se almacena en el propio sistema, elevando su temperatura. Para revertirlo, al igual que en el caso anterior, debemos violar K-P
+\end{itemize}
+\subsection{Irreversibilidad mecánica interna}
+Este tipo de irreversibilidad se da cuando la energía interna de un sistema se transforma en energía mecánica y luego se vuelve a transformar en energía interna. 
+\begin{ejemplo}[Expansión de un gas contra el vacío]
+Diferenciaremos dos casos;
+\begin{enumerate}
+    \item Gas ideal: La expansión provoca un aumento de volumen y una disminución de la presión sin variación de temperatura ni realización de trabajo. Para devolver el sistema a sus estado inicial, sería necesario realizar trabajo sobre él, lo que implicaría ceder calor a un foco térmico y transformarlo en trabajo, por lo tanto viola K-P-
+    \item Gas real: La expansión provoca una ligera disminución de temperatura, lo que implica la absorción de calor de un foco térmico. Al comprimir el gas, sería necesario realizar trabajo sobre él y ceder calor al foco, lo que nuevamente violaría el enunciado de Kelvin-Planck
+\end{enumerate}
+\end{ejemplo}
+
+\subsection{Irreversibilidad térmica}
+Al ocurrir una transferencia de calor entre sistemas debido a una diferencia finita de temperatura se da una irreversibilidad, para invertir este proceso sin modificar el medio externo sería necesario que el calor fluyera espontáneamente desde el foco frio al caliente, lo que contradice el enunciado de Clausius. 
+
+\subsection{Procesos naturales}
+Los procesos anteriores pueden clasificarse dentro de las categorías ya impuestas, por lo que podemos concluir que \textbf{en la naturaleza no se dan procesos completamente reversibles.} Podemos aproximar un proceso a otro reversible si los efectos de los fenómenos reversibles son despreciables. Además, para que un proceso sea reversible, los intercambios de calor deben ocurrir con diferencias infinitesimales de temperatura, lo que implica que el proceso también sea cuasiestático. \textbf{Sin embargo, no todos los procesos cuasiestáticos son reversibles}, ya que pueden involucrar fenómenos disipativos. 
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Rendimiento de una máquina térmica: Ciclo de Carnot. Igualdad de Clausius: Concepto de Entropia}
+\section{Ciclo de Carnot. Teorema de Carnot}
+
+El ciclo de Carnot es el proceso cíclico más simple que podemos estudiar. Se basa en el intercamvio de calor de un sistema con dos focos térmicos de temperatura ($T_1>T_2$) mediante procesos isotermos y permaneciendo aislado del exterior durante los procesos adiabático como se ve en la figura \ref{carnot}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{carnot.png}
+    \caption{Ciclo de Carnot}
+    \label{carnot}
+\end{figure}
+Usando de referencia la figura, vamos a distinguir las siguientes etapas del ciclo: 
+\begin{enumerate}
+    \item \textbf{Expansión isoterma (1-2):} El sistema expande a temperatura constes absorbiendo una cantidad de calor $Q_1>0$ del foco caliente.
+    \item \textbf{Expansión adiabática (2-3):} El sistema se expande desde $T_1$ hasta $T_2$ sin intercambiar calor con el exterior. La energía interna disminuye debido al trabajo realizado por el sistema. 
+    \item \textbf{Compresión isoterma (3-4):} El sistema se comprime a temperatura constante $T_2$ cediendo una cantidad de calor $Q_2<0$ al foco frío. 
+    \item \textbf{Compresión adiabática (4-1):} El sistema se comprime desde $T_2$ hasta $T_1$ sin intercambiar calor con el exterior, recuperando su estado inicial
+\end{enumerate}
+
+El trabajo total realizado por este ciclo de Carnot está representado en el área encerrada representada en rojo \ref{carnot}. Según el primer principio de la Termodinámica, el trabajo total es igual a la suma de los calores intercambiados de forma que: 
+\begin{equation}
+    W=Q_1+Q_2=Q_1-|Q_2|
+\end{equation}
+El rendimiento del ciclo de Carnot viene dado por: 
+\begin{equation}
+    \eta=\frac{W}{Q_1}=\frac{Q_1-|Q_2|}{Q_1}=1-\frac{|Q_2|}{Q_1}=1+\frac{Q_2}{Q_1}
+    \label{pre_ren_carnot}
+\end{equation}
+\begin{ejemplo}[Ciclo de Carnot para un Gas Ideal]
+Suponiendo que el sistema esta compuesto por un gas ideal, podemos expresar los calores intercambiados como: 
+\begin{equation}
+    Q_1=nRT_1\ln\frac{V_2}{V_1} \qquad Q_2=nRT_2\ln\frac{V_4}{V_3}
+    \label{calores}
+\end{equation}
+Para los procesos adiabáticos, la relación entre temperatura y volumen vendrá dada por: 
+\begin{equation}
+    T_1V_2^{\gamma-1}=T_2V_3^{\gamma-1} \qquad T_2V_4^{\gamma-1}=T_1V_1^{\gamma-1}
+    \label{gammas}
+\end{equation}
+Dividiendo \ref{calores} y \ref{gammas} obtenemos, 
+\begin{equation}
+    \frac{V_2}{V_1}=\frac{V_3}{V_4}
+\end{equation}
+Sustituyendo esta relación en a expresión del rendimiento \ref{pre_ren_carnot}
+\begin{equation}
+    \eta=1+\frac{Q_2}{Q_1}=1+\frac{T_2\ln(V_4/V_3)}{T_1 \ln(V_2/V_1)}=1-\frac{T_2}{T_1}
+\end{equation}
+\end{ejemplo}
+Podemos entonces definir los siguientes conceptos en referencia a una máquina que opera según el ciclo de Carnot. 
+\begin{formula}
+    \begin{definicion}[Máquina de Carnot]
+    Aquella máquina térmica que convierte calor en trabajo mediante un ciclo de Carnot.
+    \end{definicion}
+    \begin{definicion}[Máquina frigorífica de Carnot] Transfiere calor desde un foco frío a uno caliente mediante el mismo ciclo. 
+    \end{definicion}
+\end{formula}
+El ciclo de Carnot establece un \textbf{límite teórico} para el rendimiento de cualquier máquina térmica. Se usa como referencia en el estudio de la Termodinámica. Partiendo del segundo princpio de la Termodinámica se demuestra el siguiente enunciado, el \textbf{Teorema de Carnot}
+\begin{formula}
+    \begin{teorema}[Teorema de Carnot]
+    Ninguna máquina que opere entre dos temperaturas pueden tener mayor rendimiento que una máquina térmica de Carnot funcionando entre dichas temperaturas
+    \end{teorema}
+\end{formula}
+Es decir, toda máquina térmica que consideremos es menos eficiente que una máquina de Carnot. 
+\begin{proof}
+    Vamos a demostrar este teorema, considerando dos máquina térmicas X y C operando entre los mismos focos de temperatura $T_1,T_2$ de manera que X es una máquina térmica cualquiera y C una máquina de Carnot como la que hemos descrito. Como el montaje que se encuentra en al figura \ref{demos_carnot}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{demo_carnot.png}
+        \caption{Maquina C y X usada para demsotrar el teorema de Carnot}
+        \label{demos_carnot}
+    \end{figure}
+
+    Siempre podremos configurar la máquina de Carnot de forma que, variando su velocidad, podamos extraer del foco caliente la misma cantidad de calor que la máquina X. Ajustaremos las máquinas de forma que
+    \begin{equation}
+        Q_1=Q'_1
+    \end{equation}
+    Si dadas estas condiciones, invertimos el sentido del funcionamiento de la máquina de Carnot y la acoplamos a la máquina X, podemos ver que el foco $T_1$ no interviene en el proceso, pues absorbe la misma cantidad de calor que cede. 
+    \\
+    Según el enunciado de Kelvin-Planck, sabemos que es imposible que, extrayendo calor de un solo foco, $Q_2'-|Q_2|$ obtener una cantidad equivalente de trabajo. Por lo tanto, le sistema que hemos construido debe satisfacer que: 
+    \begin{equation}
+        Q_2'-|Q_2|=W-W'=0
+    \end{equation}
+    Llegando a una solución válida. Y a partir de esta expresión podemos escribir: 
+    \begin{equation}
+        Q_2-|Q_2'|<0 \rightarrow Q_2<|Q_2'| \rightarrow \frac{Q_2}{Q_1}<\frac{|Q_2'|}{Q_1} \rightarrow1-\frac{|Q_2'|}{Q_1}>1-\frac{Q_2}{Q_1} \xrightarrow{\eta}\eta_C>\eta_X
+    \end{equation}
+Hemos llegado a la siguiente expresión
+\begin{formula}
+    \begin{equation}
+        \eta_C>\eta_X
+    \end{equation}
+\end{formula}
+que nos indica que el rendimiento de una máquina de Carnot que trabaje entre dos temperaturas dadas es siempre mayor que el rendimiento de cualquier otra máquina que trabaje entre los mismos focos térmicos. 
+\end{proof}
+
+De forma complementaria al teorema de Carnot podemos encontrar el siguiente corolario.
+\begin{corolario}
+    Todas las máquinas térmicas reversibles que funcionen entre dos temperaturas dadas tienen el mismo rendimiento
+\end{corolario}
+\begin{proof}
+    Consideremos ahora una máquina de Carnot y una máquina reversible funcionando entre dos focos de temperatura con sus rendimientos, que supongamos, verifican el teorema de Carnot, es decir
+    \begin{equation}
+        \eta_C>\eta_R
+    \end{equation}
+    es decir se verifica que
+    \begin{equation}
+        \frac{W}{Q_1}>\frac{W'}{Q_1'}
+    \end{equation}
+    Si ajustamos el funcionamiento de las máquinas para conseguir que el trabajo verfique que $W=W'$ tendremos que
+    \begin{equation}
+       Q_1<Q_1' \rightarrow|Q_1|<|Q_1'| \qquad \text{ya que}  \quad Q_1,Q_1'>0 
+    \end{equation}
+    Y también que: 
+    \begin{equation}
+        |Q_1|-|Q_2|=|Q_1'|-|Q_2'| \rightarrow |Q_1'|-|Q_1|=|Q_2'|-|Q_2|>0 \rightarrow|Q_2'|>|Q_2|
+    \end{equation}
+    Puesto que la máquina R es reversible, podemos invertir su sentido de funcionamiento y los intercambios de calor y trabajo se realizaran en sentido contrario. Si ahora acoplamos ambas máquinas, el resultado funcionara de forma que extraera una cantidad de calor $|Q_2'|>|Q_2|$ del foco frío y cedera una cantidad de calor $|Q_1'|-|Q_1|$ al foco caliente. Al ser estas cantidades iguales se transferirán sin hacer uso de un trabajo externo, \textbf{violando el enunciado de Clausius}, por lo tanto podemos concluir que la hipotesis de partida es \textbf{falsa}. Y por lo tanto no se puede verificar que $\eta_C>\eta_R$.
+    \\
+    Si suponemos ahora que $\eta_C<\eta_R$, incumplimos el teorema de Carnot, por lo tanto tampoco podemos verificar esta hipotesis. De forma que, ha de verificarse que $\eta_C=\eta_R$, independientemente de la sustancia que usen las máquinas y del tipo de trabajo que se extraiga de ellas, con lo que podemos entonces escribrir el siguiente enunciado de forma general
+    \begin{formula}
+    Cualquier máquina encuentra un limite teorico de rendimiento en una máquina de Carnot
+    \begin{equation}
+        \eta_C \geq \eta_X 
+    \end{equation}
+    pudiendo tratarse $X$ de una máquina reversible, caso donde si obtendriamos la igualdad.
+    \end{formula}
+\end{proof}
+
+Al ser la temperatura la única coordenada pro determinar en el funcionamiento de una máquina térmica reversible. su rendimiento solo dependerá de ella de forma que,
+    \begin{equation}
+    \eta_C=\eta_R=f(T_1,T_2)
+    \end{equation}    
+
+\section{Escala termodinámica de temperaturas}
+Vamos a demostrar que el rendimiento de térmica reversible no depende de la sustancia de trabajo, lo que nos permite definir la \textbf{escala termodinámica de temperatura}. Tal y como hemos confirmado en el primer apartado, podemos escribir: 
+\begin{equation}
+    \eta_C=\frac{W}{Q_1}=\frac{|Q_1|-|Q_2|}{|Q_1|}=1-\frac{|Q_2|}{|Q_1|}=f(T_1,T_2)\rightarrow \frac{|Q_2|}{|Q_1|}=\Phi(T_1,T_2)
+\end{equation}
+Consideremos ahora tres fuentes térmicas de temperaturas $T_1>T_0>T_2$ y tres máquinas de Carnot trabajando entre ellas de la forma que se indica en el esquema. Ajustaremso las máquinas 1 y 2 de forma que el calor cedido por la primera máquina al foco $T_0$ sea igual al absorbido por la máquina 2 de este foco e igualmente para ajustar la máquina 3 con la máquina 1. En estas condiciones, podemos resultar que el calor cedido por las máquinas 2 y 3 al foco $T_2$ tambien debe ser el mismo, teniendo en cuenta que el conjunto de maquinas 1+2 es equivalente a la máquina 3. Por lo tanto podemos considerar: 
+\begin{equation}
+    W_1+W_2=W_3 \equiv |Q_1|-|Q_2|=|Q_0|-|Q_2|+|Q_1|-|Q_0|
+\end{equation}
+Si consideramos la expresión que hemos obtenido para el rendimiento de un ciclo reveresible, tenemos que: 
+\begin{equation}
+    \frac{|Q_0|}{|Q_1|}= \Phi(T_0,T_1) \quad 
+    \frac{|Q_2|}{|Q_0|}= \Phi(T_2,T_0)
+    \quad
+     \frac{|Q_2|}{|Q_1|}= \Phi(T_2,T_1) 
+\end{equation}
+Y al combinar estas expresiones, podemos obtener: 
+\begin{equation}
+    \frac{|Q_0|}{|Q_1|}\frac{|Q_2|}{|Q_0|}=\frac{|Q_2|}{|Q_1|} \rightarrow \Phi(T_0,T_1)\Phi(T_2,T_0)=\Phi(T_2,T_1)
+\end{equation}
+Por lo tanto no queda otra que considerar que las funciones $\Phi(T_i,T_j)$ sean de la forma
+\begin{equation}
+    \Phi(T_i,T_j)=\frac{\Psi(T_0)}{\Psi(T_j)} \frac{\Psi(T_i)}{\Psi(T_0)}=\frac{\Psi(T_i)}{\Psi(T_j)} \rightarrow\frac{|Q_i|}{|Q_j|}=\frac{\Psi(T_i)}{\Psi(T_j)}
+\end{equation}
+Siendo $\Psi$ una función matemática arbitraria. La más simple que podemos considerar es $\Psi(T)=T$ con lo cual resulta inmediato 
+\begin{equation}
+    \frac{|Q_2|}{|Q_1|}=\frac{\Psi(T_2)}{\Psi(T_1)}=\frac{T_2}{T_1} \rightarrow T_2=T_1\frac{|Q_2|}{|Q_1|}
+\end{equation}
+Con esta expresión si podemos medir a temperatura de un foco térmico considerando el calor intercambiado por una máquina de Carnot con dicho foco y el calor intercambiado con otro foco cuya temperatura se tome como patrón. Si tomamos esta temperatura patrón como la correspondiente al punto triple del agua, $T=273,16 \text{K}$ tendremos que 
+\begin{equation}
+    T=273,16\frac{|Q|}{|Q_T|}\text{K}
+\end{equation}
+donde $|Q_T|$ corresponde con el calor intercambiado con el foco que se encuentra a la temperatura del punto triple del agua y $|Q|$ es el calor intercambiado por la máquina de Carnot con el foco a temperatura desconocida. Tal y como hemos definido la escala $|Q|$ es nuestra variable termométrica, con la importancia de que el cociente $\frac{|Q|}{|Q_T|}$ es independiente de la naturaleza del sistema que consideremos. 
+\\
+
+A esta escala que hemos definido se le denomina \textbf{Escala Termodinámica de Temperaturas} y recordando la expresión para el rendimiento de una máquina de Carnot en el caso de un gas ideal podemos ver que coincide con la escala Kelvin. A partir de la ultima expresión que hemos escrito, podemos definir el cero absoluto de temperaturas, $0 \text{K}$. 
+\begin{formula}
+    \begin{definicion}[Cero absoluto de temperaturas]
+        Aquella temperatura a la cual se realiza un proceso isotermo reversible sin que se produzca intercambio de calor. La propia definición imposibilita alcanzar de forma práctica esta temperatura
+    \end{definicion}
+\end{formula}
+
+
+
+
+\section{Igualdad de Clausius: concepto de entropía}
+Consideremos un proceso reversible cualquiera entre dos estados de equilibrio A y D, resultando en el diagrama p-V de la figura \ref{fig:igualdad}. Para ello, trazamos las adiabáticas que pasen por los puntos A y D y escogemos una transformación isoterma que vaya de una adiabática a otra entre los puntos B y C, de forma que se cumpla que el área encerrada bajo los puntos A y D sea la misma que el área encerrada bajo A-B-C-D. Por lo tanto, de forma gráfica, podemos verificar que: 
+\begin{equation}
+    W_{A\to D}= W_{A\to B\to C \to D}
+    \label{igualdad_W}
+\end{equation}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{igaualdad.png}
+    \caption{Diagrama P-V para demostrar la Igualdad de Clausius}
+    \label{fig:igualdad}
+\end{figure}
+
+Si consideramos que la variación de energía interna no depende del camino elegido (por ser una función de estado) podemos escribir la siguiente igualdad: 
+\begin{equation}
+    \Delta U_{A\to D}=\Delta U_{A \to B \to C \to D} \xrightarrow[\eqref{igualdad_W}]{1^{er} \text{ppio.}}  Q_{A\to D}=Q_{A \to B \to C \to D} 
+\end{equation}
+Y finalmente al ser A-B y C-D procesos adiabáticos, tenemos que finalmente: 
+\begin{equation}
+    Q_{A\to D}=Q_{B \to C}
+\end{equation}
+Con lo cual, hemos sustituido un proceso cualquier por un conjunto de procesos en el los que el calor se intercambia exclusivamente de forma isoterma (haciendo uso de un solo foco térmico)
+\\
+Si consideramos ahora un proceso cíclico de un sistema X cualquiera. Dividiéndolo, en distintos tramos, podemos aplicar a cada uno de estos procesos que acabamos de ver, es decir, sustituirlo por dos adiabáticas y una isoterma, con lo que, el ciclo completo se puede sustituir con una cantidad arbitrari (n) de ciclos de Carnot Si recordamos la expresión para el rendimiento \eqref{pre_ren_carnot}, podemos escribir que para el i-esimo ciclo se verifica que, 
+\begin{equation}
+    \frac{Q_{2i-1}}{T_{2I-1}}+\frac{Q_{2i}}{T_{2i}}=0
+\end{equation}
+Entonces al sumar para todos los ciclos: 
+\begin{equation}
+    \sum_{i=1}^{2n}\frac{Q_i}{T_i}=0
+\end{equation}
+si hacemos el paso infinitesimal para el número de ciclos de Carnot para los que descomponemos el proceso cíclico, finalmente tendremos: 
+\begin{formula}
+\begin{equation}
+    \lim_{n \to \infty} \sum_{i=1}^{2n} \frac{Q_i}{T_i}=0 \rightarrow \oint_R \frac{\delta Q}{T}=0
+\end{equation}    
+\end{formula}
+Este paso que se verifica para cualquier proceso cíclico reversible, es la expresión matemática del conocido \textbf{Teorema de Clauisius}. 
+\\
+
+Si consideramos ahora un sistema termodinámico cualquiera que realiza una transformación reversible entre los estados A y B a lo largo de un proceso $C_1$ y desde B hasta A un proceso, igualmente reversible que sigue un camino $C_2$. Aplicando el teorema de Clauisus al proceso total tenemos: 
+\begin{equation}
+    \oint_{(R)C_1+C_2}\frac{\delta Q}{T}=0 \rightarrow \int^B_{(R,C_1)A} \frac{\delta Q}{T}+\int_{(R,C_2)B}^A \frac{\delta Q}{T}=0 \rightarrow \int^B_{(R,C_1)A} \frac{\delta Q}{T}=-\int_{(R,C_2)B}^A \frac{\delta Q}{T} 
+\end{equation}
+y finalmente llegamos a 
+\begin{equation}
+    \int^B_{(R,C_1)A} \frac{\delta Q}{T} = \int^B_{(R,C_2)A} \frac{\delta Q}{T}
+\end{equation}
+No hemos impuesto ninguna reestricción sobre los procesos $C_1$ y $C_2$, entonces la expresión $\int_R \frac{\delta Q}{T}$ no depende del proceso seguido, sino de los puntos inicial y final, es decir, \textbf{es una función de estado del sistema}.
+
+\begin{formula}
+\begin{definicion}[Variación de entropia entre dos puntos A y B]
+Esta nueva función de estado, la entropía, varía entre dos puntos A y B según: 
+\begin{equation}
+    \Delta S=S_B-S_A= \int_{(R)A}^B \frac{\delta Q}{T}
+\end{equation}
+o expresada de forma diferencial: 
+\begin{equation}
+    \delta Q=TdS
+\end{equation}
+\end{definicion}    
+\end{formula}
+De acuerdo a la expresión del Teorema de Clausius, podemos concluir que para cualquier proceso cíclico reversible la variación de entropía es nula, su valor se mantiene constante de forma que: 
+\begin{equation}
+    \Delta S= \oint_R \frac{\delta Q}{T}=0
+\end{equation}
+para cualquier proceso adiabático (es decir, $\delta Q=0$) reversible, la variación de entropía es nula. \textbf{Un proceso adiabático reversible es un proceso isentrópico}
+
+\section{Desigualdad de Clausius: principio de aumento de entropía}
+Si en lugar de considerar como lo hemos hecho en el apartado anterior una máquina reversible, consideramos una máquina X cualquiera trabajado entre dos temperaturas $T_1,T_2$, podemos considerar: 
+\begin{equation}
+    \eta \leq \eta
+    _C \rightarrow \frac{Q_1}{T_1}+\frac{Q_2}{T_2} \leq0
+\end{equation}
+para un número n de ciclos y haciendo el paso infinitesimal como en el apartado anterior llegamos a 
+\begin{equation}
+    \sum_{i=1}^{2n} \frac{Q_i}{T_i} \leq0 \rightarrow \oint \frac{\delta Q}{T}<0
+\end{equation}
+esta expresión constituye la forma matemática de la desigualdad de Clauisus. 
+\begin{nota}
+    Al estar la variación de entrop
+    ia definida solo para procesos reversibles (hasta ahora) no nos dice nada de como evoluciona la entropía en un sistema
+\end{nota}
+Si consideramos un sistema que pasa de un estado A a otro B, ambos de equilibrio mediante un proceso irreversible, I, y otro proceso reversible, R, que devuelve el sistema de B a A. El proceso cíclico en su conjunto es irreversible, con lo que, partiendo de la desigualdad de Clausius, podemos escribir: 
+\begin{equation}
+    \oint_I \frac{\delta Q}{T}= \int_{(I)A}^B \frac{\delta Q}{T}+\int_{(R)B}^A \frac{\delta Q}{T}<0 \rightarrow \int_{(I)A}^B \frac{\delta Q}{T} < \int_{(R)A}^B \frac{\delta Q}{T}
+\end{equation}
+El segundo miembro de esta desigualdad, puesto que la integral está calculada para un proceso reversible, nos permite escribir: 
+\begin{equation}
+    \int_{(I)A}^B \frac{\delta Q}{T} \rightarrow S_B-S_A =\Delta S
+\end{equation}
+si suponemos ahora que el sistema esta aislado del exterior cuando realizaba el proceso irreversible, tendremos que: $\Delta S=S_B-S_A>0$. Lo que nos indica que la entropía de un sistema que realiza un proceso adiabático irreversible siempre aumenta. Para el caso en el que el sistema realice el proceso de forma adiabática reversible, tendremos de acuerdo con el apartado anterior: 
+\begin{equation}
+    S_B-S_A=\Delta S= \int_{(R)A}^B \frac{\delta Q}{T}=0
+\end{equation}
+De forma general para cualquier sistema que realice un proceso aislado, se verificará que: 
+\begin{formula}
+    \begin{equation}
+        \Delta S \geq 0
+    \end{equation}
+\end{formula}
+Para un sistema que realice un proceso que no sea aislado, no tiene por qué verificarse lo anterior, la variación de entropía de un sistema cuando se realice un proceso no aislado puede ser negativa, positiva o nula, dependiendo del tipo de transformación que realice. 
+\\
+
+Recordando que bajo el concepto de universo se engloba al sistema y al medio externo que lo rodea. EL universo se considera siempre como un sistema aislado, por lo tanto que podemos escribir para un proceso irreversible: 
+\begin{equation}
+    \Delta S_U=\Delta S_S+\Delta S_{medio}
+\end{equation}
+Teniendo en cuenta que si el sistema esta aislado $\Delta S_{medio}=0$ y la variación de entropía del universo reflejará la variación de entropía del sistema. Como prácticamente todos los procesos que se producen de forma espontánea son de tipo irreversible, nos permite postular el siguiente principio
+\begin{formula}
+    \begin{ley}[\textbf{Segundo Principio de la Termodinámica}: Principio de aumento de entropía]
+    Cualquier proceso real que se produzca en la naturaleza de forma espontánea supone un aumento de entropía del universo. 
+\end{ley}
+\end{formula}
+\section{Irreversibilidad y Entropía}
+Estudiaremos la irreversibilidad desde el punto de vista de la entropía, diferenciando y clasificando los diferentes tipos de irreversibilidad. Pero antes, al ser la entropía una función de estado, para calcular la variación de la entropía, se debe considerar un proceso reversible entre los mismos estados y usar la entropía como una función de estado. Se puede entonces calcular la entropía en un proceso irreversible como: 
+\begin{equation}
+    \Delta S_I \Bigl|_A^B=\Delta S_R \Bigl|_A^B= \int_{(R)A}^B \frac{\delta Q}{T}
+\end{equation}
+\subsection{Irreversibilidad mecánica externa}
+Debemos llegados a este punto distingir entre dos tipso de procesos,
+\begin{enumerate}
+    \item Por un lado los procesos \textbf{isotermos}: donde el trabajo realizado sobre el sistema se convierte en calor, que es absorbido por el foco térmico. La variación de entropía del foco térmico es positiva lo que lleva a un aumento de entropía en el universo: 
+    \begin{equation}
+        \Delta S_F=\int_R \frac{\delta Q}{T}=\frac{Q}{T_F}>0
+    \end{equation}
+    Por lo tanto, la variación de entropía del universo siempre será mayor que cero, indicando que el proceso es irreversible.
+    \\
+    Si buscamos invertir el proceso, deberíamos sacar una cantidad de calor $Q$ de la fuente y transformarla en trabajo, sin que se produjera variación en el sistema. Siendo $Q$ negativo desde el foco, su entropía vendria definida como
+    \begin{equation}
+        \Delta S= - \frac{Q}{T_F}<0
+    \end{equation}
+    \item \textbf{Proceso adiabático:} Si el sistema se encuentra aislado del medio, el calor producido por efectos disipativos se queda en el interior del sistema y se invierte en aumentar la temperatura de éste, permaneciendo inalterado el medio exterior. La variación de entropía del sistema tendrá la forma: 
+    \begin{equation}
+        \Delta S= \int_R \frac{\delta Q}{T}= \int_{T_i}^{Tf} \frac{CdT}{T}=C\ln\frac{T_f}{T_i}>0
+    \end{equation}
+    lo que nos indica un aumento de la entropía del universo, ya que la variación de entropía del medio externo es cero. 
+\end{enumerate}
+\subsection{Irreversibilidad mecánica interna}
+Escribimos la expresión para este tipo de procesos (como en el caso de la expansión para un gas ideal): 
+\begin{equation}
+    \Delta S_U=\Delta S_g= \int_R \frac{\delta Q}{T}= \int_R \frac{\delta W}{T}=nR \int_{V_i}^{V_f} \frac{dV}{V}=nR \ln\frac{V_f}{V_i}>0
+\end{equation}
+
+\subsection{Irreversibilidad térmica}
+Este tipo de irreversibilidad ocurre cuando dos sistemas a diferentes temperaturas se ponen en contacto. Como consecuencia de la interacción térmica asilada, pasará calor del sistema $S_1$ al sistema $S_2$ de manera que:
+\begin{equation}
+    \delta Q_1+\delta Q_2=0 
+\end{equation}
+De forma que la variación de entropía se calcula como: 
+\begin{equation}
+    \Delta S_1=\frac{\delta Q_1}{T_1},  \quad \Delta S_2=\frac{\delta Q_2}{T_2}
+\end{equation}
+Si suponemos que $S_1$ y $S_2$ son dos focos térmicos, su temperatura permanece inalterada aún cuando intercambien calor con el exterior, intercambiando que también sabemos que siempre se produce de forma reversible. Para este caso particular, 
+\begin{equation}
+    \Delta S_U=\Delta S_1+\Delta S_2=-\int\frac{\delta Q_2}{T_1}+ \int \frac{\delta Q_2}{T_2}=Q_2\Bigl(\frac{1}{T_2}-\frac{1}{T_1}\Bigl)
+\end{equation}
+si $T_1>T_2$ entonces $\Delta S_U>0$, lo que indica que el proceso es irreversible. 
+
+\subsection{Procesos no cuasiestáticos y aumento de entropía}
+Si consideramos un gas que experimenta un cambio repentino de la presión, tendremos un proceso irreversible. La variación de entropía del universo es: 
+\begin{equation}
+    \Delta S_U=\Delta S_S+\Delta S_F
+\end{equation}
+El intercambio de calor por parte del foco térmico es reversible, y su variación de entropía la podremos calcular teniendo en cuenta que la temperatura del gas permanece constante, es decir $\Delta U=0$, y por lo tanto: 
+\begin{equation}
+    \delta Q_S= \delta W_S=P_S dV \rightarrow Q_S=p_2(V_2-V_1)=-Q_F
+\end{equation}
+entonces considerando la expresión para la entropía que hemos estudiado antes
+\begin{equation}
+    \Delta S_F=\frac{Q_F}{T}=-\frac{P_2}{T}(V_2-V_1)=-\frac{V_2}{V_1} \xrightarrow{G.I} - \frac{P_2}{T} \Bigl(\frac{nRT}{P_2}--\frac{nRT}{P_1} \Bigl)=nR\Bigl(\frac{P_2}{P_1}-1\Bigl)
+\end{equation}
+La variación de entropía del foco, calculada para un proceso reversible será: 
+\begin{equation}
+    \Delta S_S=nR\ln\frac{P_1}{P_2}
+\end{equation}
+Para el sistema, suponiendo un proceso reversible entre los estados iniciales y finales. En este caso, el calor intercambiado por el sistema para el caso ideal, donde $Q_S=W_S$ vendrá dado por
+\begin{equation}
+    \Delta S_S=nR \ln\frac{P_1}{P_2}
+\end{equation}
+Entonces podemos escribir la variación de entropía del universo como
+\begin{equation}
+    \Delta S_U=nR\Bigl(\frac{P_2}{P_1}-1+\ln\frac{P_1}{P_2}\Bigl) >0
+\end{equation}
+\section{Entropía para un gas ideal}
+De cara a afrontar la parte práctica de la asignatura se presentan las siguientes expresiones que nos permiten calcular la variación de entropía para un gas ideal en función de las coordenadas dadas. Se trata de obtener las expresiones para la variaicón de entropía de un gas ideal que realiza un proceso cualquiera entre un estado inicial $(p_i, V_i, T_i)$ y uno final $(p_f,V_f, T_f)$
+Si partimos de: 
+\begin{equation}
+    dU=\delta Q-pdV=TdS-pdV \rightarrow dS=\frac{1}{T}dU+\frac{p}{T}dV 
+\end{equation}
+y escribiendo $dU$ como
+\begin{equation}
+    dU=nC_VdT
+\end{equation}
+Podemos escribir la entropía de un gas ideal.
+% --- Sección T, V ---
+\textbf{En función de las variables $T, V$:}
+
+\begin{equation}
+    dS = \frac{1}{T}dU + \frac{p}{T}dV = nc_v \frac{dT}{T} + nR \frac{dV}{V}
+\end{equation}
+
+\begin{formula}
+    \begin{equation}
+    \Delta S = nc_v \ln \frac{T_f}{T_i} + nR \ln \frac{V_f}{V_i}
+\end{equation}
+\end{formula}
+
+
+\vspace{1em}
+
+% --- Sección T, p ---
+\textbf{En función de las variables $T, p$:}
+
+\begin{equation}
+    dV = \left( \frac{\partial V}{\partial T} \right)_p dT + \left( \frac{\partial V}{\partial p} \right)_T dp = \frac{nR}{p}dT - \frac{nRT}{p^2}dp
+\end{equation}
+
+\begin{equation}
+    dS = nc_v \frac{dT}{T} + \frac{nR}{V} \left[ \frac{nR}{p}dT - \frac{nRT}{p^2}dp \right] = nc_v \frac{dT}{T} + nR \frac{dT}{T} - nR \frac{dp}{p} = nc_p \frac{dT}{T} - nR \frac{dp}{p}
+\end{equation}
+
+\begin{formula}
+\begin{equation}
+    \Delta S = nc_p \ln \frac{T_f}{T_i} - nR \ln \frac{p_f}{p_i}
+\end{equation} 
+\end{formula}
+
+
+\vspace{1em}
+
+% --- Sección V, p ---
+\textbf{En función de las variables $V, p$:}
+
+\begin{equation}
+    dT = \left( \frac{\partial T}{\partial p} \right)_V dp + \left( \frac{\partial T}{\partial V} \right)_p dV = \frac{V}{nR}dp + \frac{p}{nR}dV
+\end{equation}
+
+\begin{equation}
+    dS = \frac{nc_v}{T} \left[ \frac{V}{nR}dp + \frac{p}{nR}dV \right] + \frac{nR}{V}dV = nc_v \frac{dp}{p} + nc_v \frac{dV}{V} + nR \frac{dV}{V} = nc_v \frac{dp}{p} + nc_p \frac{dV}{V}
+\end{equation}
+
+\begin{formula}
+\begin{equation}
+    \Delta S = nc_v \ln \frac{p_f}{p_i} + nc_p \ln \frac{V_f}{V_i}
+\end{equation}
+\end{formula}
+
+\listoffigures
+
+
+\begin{thebibliography}{99}
+
+\bibitem{callen}
+H.~B.~Callen, \emph{Thermodynamics and an Introduction to Thermostatistics}, 2nd ed., Wiley, 1985.
+
+\bibitem{zemansky}
+M.~W.~Zemansky y R.~H.~Dittman, \emph{Heat and Thermodynamics}, 7th ed., McGraw--Hill, 1997.
+
+\bibitem{atkins}
+P.~Atkins y J.~de Paula, \emph{Physical Chemistry}, Oxford University Press (varias ediciones).
+
+\bibitem{reif}
+F.~Reif, \emph{Fundamentals of Statistical and Thermal Physics}, McGraw--Hill, 1965.
+
+\bibitem{moran}
+M.~J.~Moran, H.~N.~Shapiro, D.~D.~Boettner y M.~B.~Bailey, \emph{Fundamentals of Engineering Thermodynamics}, Wiley (varias ediciones).
+
+\bibitem{feynman}
+R.~P.~Feynman, R.~B.~Leighton y M.~Sands, \emph{The Feynman Lectures on Physics}, Vol.~I, Addison--Wesley, 1963 (cap\'itulos sobre termodin\'amica).
+
+\bibitem{landau}
+L.~D.~Landau y E.~M.~Lifshitz, \emph{Statistical Physics}, Part~1, Pergamon/Butterworth--Heinemann (varias ediciones).
+
+\end{thebibliography}
+
+\end{document}
+
