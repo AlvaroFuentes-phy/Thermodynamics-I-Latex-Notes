@@ -1,0 +1,913 @@
+\documentclass[11pt,a4paper, openany]{book}
+
+% =======================
+% Paquetes básicos
+% =======================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathpazo}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{microtype}
+\usepackage{physics}
+\usetikzlibrary{arrows.meta, positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.markings}
+
+\newcommand{\dbar}{{\mkern3mu\mathchar'26\mkern-12mu \delta}}
+\usetikzlibrary{decorations.pathmorphing, decorations.pathreplacing, arrows.meta, positioning}
+
+% =======================
+% Configuración de página
+% =======================
+\geometry{margin=2.5cm}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+\headsep=30pt
+
+% =======================
+% Colores personalizados
+% =======================
+\definecolor{ucoblue}{HTML}{003366}
+\definecolor{ucogold}{HTML}{C6A664}
+\definecolor{lightgray}{HTML}{F5F5F5}
+
+% =======================
+% Encabezado y pie
+% =======================
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textbf{Termodinámica}}
+\lhead{\includegraphics[height=1cm]{uco-logo.png}}
+\cfoot{\thepage}
+
+% =======================
+% Estilo de títulos
+% =======================
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{ucoblue}}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{ucogold}}
+  {\thesubsection}{1em}{}
+
+% =======================
+% Entornos Teorema, Ley, etc.
+% =======================
+\newtheoremstyle{ucostyle}
+  {10pt} % Space above
+  {10pt} % Space below
+  {\itshape} % Body font
+  {} % Indent
+  {\bfseries\color{ucoblue}} % Head font
+  {.} % Punctuation after theorem name
+  {0.5em} % Space after theorem name
+  {} % Theorem head spec
+
+\theoremstyle{ucostyle}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{ley}{Ley}[section]
+\newtheorem{corolario}{Corolario}[section]
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{ejemplo}{Ejemplo}[section]
+\newtheorem{solucion}{Solución}
+[chapter]
+
+% =======================
+% Cajas personalizadas
+% =======================
+\tcbset{
+  frame code={},
+  center title,
+  left=2mm,
+  right=2mm,
+  top=1mm,
+  bottom=1mm,
+  colback=lightgray,
+  colframe=ucoblue!60!black,
+  fonttitle=\bfseries,
+  rounded corners,
+  enhanced,
+  boxrule=0.6pt
+}
+
+% Caja de fórmula
+\newtcolorbox{formula}[1][]{
+  colback=ucoblue!5!white,
+  colframe=ucoblue!70!black,
+  title=#1
+}
+
+% Caja de nota
+\newtcolorbox{nota}[1][]{
+  colback=ucogold!10!white,
+  colframe=ucogold!70!black,
+  title=#1
+}
+
+% =======================
+% Documento
+% =======================
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{3cm}
+  {\Huge \bfseries Problemas de Termodinámica  \\[0.5em]}
+  {\Large Universidad de Córdoba}\\[1em]
+  \vspace{15pt}
+  \includegraphics[width=7cm]{Logotipo_I_Facultad_de_Ciencias_Fondo_blanco_negativo.png}\\
+ 
+  \vspace{2cm}
+  {\large Autor: Álvaro Fuentes Sánchez}\\
+  {\large Profesores: Rut Morales Crespo y Cristina Yubero Serrano }
+  \vspace{3cm}
+  \hspace{2cm}
+\begin{flushleft}
+\Large\textit{«The beauty of physics lies in the extent which seemingly complex and unrelated phenomena can be explained and correlated through a high level of abstraction by a set of laws which are amazing in their simplicity»}\\[0.5em]
+\large--- Melvin Schwartz (Nobel en Física 1988)
+\end{flushleft}
+\end{titlepage}
+
+
+\clearpage
+\thispagestyle{empty} % Quita el número de página
+
+\begin{center}
+    \Large \textbf{Derechos de autor}
+\end{center}
+
+\vspace{0.5cm}
+
+Al ser unos apuntes de clase, este documento no pretende ser un trabajo original, sino que está basado en gran parte en las clases impartidas en la \textbf{Universidad de Córdoba} y diversos libros de texto de referencia. Para hacer la lectura más amena, se han omitido las referencias explícitas en cada sección.
+
+\vspace{0.3cm}
+
+  Estos apuntes están escritos bajo la licencia Creative Commons, concretamente con la licencia:
+
+\begin{center}
+    \textbf{Reconocimiento-NoComercial CC-BY-NC}
+\end{center}
+
+  Esto implica que:
+\begin{itemize}[label=\textbullet]
+    \item El beneficiario de la licencia tiene el derecho de copiar, distribuir, exhibir y representar la obra y hacer obras derivadas siempre y cuando reconozca y cite la obra de la forma especificada por el autor.
+    \item El beneficiario de la licencia tiene el derecho de copiar, distribuir, exhibir y representar la obra y hacer obras derivadas para fines no comerciales.
+\end{itemize}
+
+\vspace{0.5cm}
+
+
+\begin{center}
+    \Large \textbf{Copyright}
+\end{center}
+
+\vspace{0.5cm}
+
+  Being a set of lecture notes, this work does not pretend to be original, but clearly relies heavily on textbooks and courses from the \textbf{University of Córdoba}. In order to make the text more readable, we have omitted the explicit references throughout the text.
+
+\vspace{0.3cm}
+
+  This work has been written under the Creative Commons license, more specifically under the licence:
+
+\begin{center}
+    \textbf{Attribution-NonCommercial CC-BY-NC}
+\end{center}
+
+  This means that:
+\begin{itemize}[label=\textbullet]
+    \item Licensees may copy, distribute, display and perform the work and make derivative works based on it only if they give the author or licensor the credits in the manner specified by these.
+    \item Licensees may copy, distribute, display and perform the work and make derivative works based on it only for noncommercial purposes.
+\end{itemize}
+
+\vspace{1.5cm}
+
+\begin{flushright}
+    Fuente Palmera, \today
+\end{flushright}
+
+\chapter{Problemas teóricos}
+
+\begin{enumerate}
+    \item Considerando las expresiones: 
+    \begin{align}
+            \delta Q=C_VdT+ldV \\ \delta Q= C_PdT +hdP \\ \delta Q=\lambda dV+ \mu dP
+    \end{align}
+determina los coeficientes calorímetricos $l,h,\lambda$ y $\mu$ en función de $C_V$, $C_P$ y los coeficientes termodinámicos $\alpha, \kappa_T$
+
+\begin{solucion}
+Para relacionar estos coeficientes entre si escribimos la ecuación de estado
+\begin{equation}
+    dV=V\alpha dT-V\kappa_TdP
+\end{equation}
+y sustituimos en la expresión del calor para agrupar los diferenciales de forma que
+\begin{equation}
+    \delta Q=C_v dT+l(V\alpha dT-V\kappa_TdP)=(C_V+lV\alpha)dT-(V\kappa_T)dP
+\end{equation}
+esto se puede identificar con la segunda expresión para el calor del enunciado; por lo tanto: 
+\begin{equation}
+    (C_V+lV\alpha)dT-(V\kappa_T)dP=C_PdT+hdP
+\end{equation}
+de donde obtenemos la siguiente relación:
+\begin{equation}
+    \begin{cases}
+        (C_V+lV\alpha)=C_P
+        \\
+        -V\kappa_T=h
+    \end{cases}
+\end{equation}
+y, ya llegados a este punto, podemos despejar $l$ y $h$
+\begin{formula}
+    \begin{equation}
+        l=(C_P-C_V)\frac{1}{V\alpha}
+    \end{equation}
+\end{formula}
+\begin{formula}
+    \begin{equation}
+        h=(C_V-C_P)\frac{\kappa_T}{\alpha}
+    \end{equation}
+\end{formula}
+de forma similar, usando la tercera expresión, podemos escribir
+\begin{equation}
+    \delta Q= \lambda dV+ \mu dP= \lambda(V\alpha dT-V\kappa_TdP)+ \mu dP= \lambda V\alpha dT+(\mu-\lambda V\kappa_T)dP
+\end{equation}
+obtenemos entonces la siguiente relación 
+\begin{equation}
+    \begin{cases}
+        \lambda V \alpha=C_P
+        \\
+        \mu-\lambda V\kappa_T=h
+    \end{cases}
+\end{equation}
+de donde se obtiene finalmente la relación 
+\begin{formula}
+    \begin{equation}
+        \lambda=C_P\frac{1}{V\alpha}
+    \end{equation}
+\end{formula}
+\begin{formula}
+    \begin{equation}
+        \mu=C_V\frac{\kappa_T}{\alpha}
+    \end{equation}
+\end{formula}
+\end{solucion}
+\item Para un gas ideal con: 
+\begin{equation}
+    C_V=\frac{3}{2}nR
+\end{equation}
+se nos pide calcular: 
+\begin{itemize}
+    \item Los coeficientes termodinámicos $\alpha$ y $\kappa_T$
+    \item Los coeficientes calorímetricos $l,h, \lambda$ y $\mu$
+    \item Expresa el calor intercambiado en un proceso reversible elemental cualquiera como una forma diferencial lineal en función de los pares de variables T-V, P-V, V-P.
+    \item Determina la variación de entropía en un proceso finito en el que el sistema pasa 
+    $(V_0, P_0) \rightarrow (V,P)$
+\end{itemize}
+\begin{solucion}
+    Recordemos la definición de estos coeficientes térmicos, para $\alpha$ y para $\kappa_T$
+    \begin{formula}
+    \begin{equation}
+        \alpha=\frac{1}{V}\Bigl(\frac{\partial V}{\partial T}\Bigl)_P
+        \qquad \kappa_T=-\frac{1}{V}\Bigl(\frac{\partial V}{\partial P}\Bigl)_T
+    \end{equation}
+    \end{formula}
+
+    
+    si consideramos la ecuación de los gases ideales $pV=nRT$ las expresiones se reducen para $\alpha$ a 
+    \begin{equation}
+    \alpha=\frac{1}{V}\Bigl(\frac{\partial V}{\partial T}\Bigl)_P= \frac{1}{V}\frac{nR}{P}=\frac{P}{nRT}\frac{nR}{P}=\frac{1}{T} \rightarrow \alpha=\frac{1}{T}
+    \end{equation}
+    y para $\kappa_T$ siguiendo el mismo procedimiento a 
+    \begin{equation}
+        \kappa_T=\frac{1}{P}
+    \end{equation}
+    Podemos retomar un resultado anterior (en el ejercicio 1) donde se relacionaban estos mismos coeficientes ($l,h, \lambda, \mu$) con $\alpha, \kappa_T$ y $C_P, C_V$.  El enunciado nos proporciona la expresión de $C_V$, entonces lo primero es encontrar $C_P$, relacionados ambos mediante:
+    \begin{equation}
+        C_P=C_V+R
+    \end{equation}
+    entonces, $C_P=\frac{3}{2}nR+R=\frac{5}{2}nR$, y por lo tanto empezamos a usar las relaciones que hemos demostrado en el \textbf{ejercicio 1}.
+    \begin{itemize}
+        \item Para $l$: 
+        \begin{equation}
+            l=\Bigl(\frac{5}{2}-\frac{3}{2}\Bigl)nR\frac{1}{V\frac{1}{T}} \rightarrow l= \frac{nRT}{V} = P
+        \end{equation}
+        \item Para $h$:
+        \begin{equation}
+            h= \Bigl(\frac{3}{2}-\frac{5}{2}\Bigl)\frac{\kappa_T}{\alpha} \rightarrow h= -(nR)\frac{1/P}{1/T} = -\frac{nRT}{P}=-V
+        \end{equation}
+        \item Para $\lambda$: 
+        \begin{equation}
+            \lambda=\frac{5}{2}nR\frac{1}{V\frac{1}{T}}=\frac{5}{2}\frac{nRT}{V} \xrightarrow{g.i} \lambda=\frac{5}{2}P
+        \end{equation}
+        \item Para $\mu$
+        \begin{equation}
+            \mu=C_V\frac{\kappa_T}{\alpha}=\Bigl(\frac{3}{2}nR\Bigl)\frac{T}{P}=\frac{3}{2}\Bigl(\frac{nRT}{P}\Bigl)=\frac{3}{2}V
+        \end{equation}
+    \end{itemize}
+Entonces los resultados que hemos obtenido para un gas ideal son los siguientes
+\begin{formula}
+    \begin{equation}
+        l=P, \quad h=-V, \quad\lambda=\frac{5}{2}P, \quad \mu=\frac{3}{2}V
+    \end{equation}
+\end{formula}
+El objetivo del siguiente apartado es expresar el calor en función de los recien calculados indices calorimétricos. Así que para cada par de coordenadas tenemos: \begin{itemize}
+    \item En función de $(T,V)$: 
+    \begin{equation}
+        \delta Q= C_VdT+ldV \rightarrow \delta Q=\frac{3}{2}nRdT+PdV
+    \end{equation}
+    \item En función de $(T,P)$:
+    \begin{equation}
+        \delta Q= C_pdT+hdP=\frac{5}{2}nRdT-VdP
+    \end{equation}
+    \item En función de $(P,V)$:
+    \begin{equation}
+        \delta Q=\mu dP+\lambda dV=\frac{3}{2}VdP+\frac{5}{2}PdV
+        \label{calor_2}
+    \end{equation}
+\end{itemize}
+Y por ultimo si queremos calcular la variación de entropía entre los estados $(V_0,P_0)$ y $(V,P)$. De la definición del diferencial de $S$: 
+\begin{formula}
+\begin{equation}
+    dS=\frac{\delta Q}{T}
+\end{equation}    
+\end{formula}
+si dividimos la expresión \eqref{calor_2} entre $T$, llegamos a 
+\begin{equation}
+    dS=\frac{3}{2}\frac{V}{T}dP+\frac{5}{2}\frac{P}{T}dV \xrightarrow{g.i}dS=\frac{3}{2}\frac{V}{PV/nR}dP+\frac{5}{2}\frac{P}{PV/nR}dV=\frac{3}{2}nR\frac{dP}{P}+\frac{5}{2}nR\frac{dV}{V}
+\end{equation}
+y ahora integramos: 
+\begin{equation}
+    \int_{S_0}^S dS=\frac{3}{2}nR\int_{P_0}^P\frac{dP}{P}+\frac{5}{2}nR\int_{V_0}^V
+\frac{dV}{V} 
+\end{equation}
+para llegar a la expresión
+\begin{formula}
+    \begin{equation}
+        \Delta S=\frac{3}{2}nR \ln \Bigl( \frac{P}{P_0}\Bigl)+\frac{5}{2}nR \ln \Bigl( \frac{V}{V_0}\Bigl)
+    \end{equation}
+\end{formula}
+\begin{nota}
+Como la entropía es una función de estado su expresión debe coincidir sea cuales sean el par de variables termodinámicas que consideremos. Se deja como ejercicio al lector comprobar esta propiedad
+\end{nota}
+\end{solucion}
+\item Considerando un proceso genérico $\Gamma$, podemos expresar $\delta Q=C_{\Gamma}dT$. Halla las ecuaciones de politropía que determinan: 
+\begin{equation}
+    \frac{dT}{dP} \Biggl|_{\Gamma} \qquad\frac{dT}{dV} \Biggl|_{\Gamma}
+\end{equation}
+correspondientes a las curvas $T=T(P)$ y $T=T(V)$ para dicho proceso $\Gamma$. 
+\begin{solucion}
+    Consideramos de nuevo las tres expresiones para el calor con las que hemos estado trabajando hasta este punto: 
+    \begin{align}
+            \delta Q=C_VdT+ldV \\ \delta Q= C_PdT +hdP \\ \delta Q=\lambda dV+ \mu dP
+    \end{align}
+para $ \frac{dT}{dP} \Bigl|_{\Gamma}$: consideramos la expresión que relaciona $dT$ y $dP$, e igualamos por lo tanto llegamos a la siguiente igualdad 
+\begin{equation}
+    C_PdT+hdP=C_{\Gamma}dT 
+\end{equation}
+y ahora va a ser de aquí donde despejemos $ \frac{dT}{dP} \Bigl|_{\Gamma}$:
+\begin{equation}
+    C_PdT+hdP=C_{\Gamma}dT \rightarrow hdP =  C_{\Gamma} dT -  C_PdT \rightarrow hdP= (C_{\Gamma}-C_P)dT 
+\end{equation}
+pasando $dP$ al lado derecho:
+\begin{formula}
+    \begin{equation}
+    \frac{h}{C_{\Gamma}-C_P}=\frac{dT}{dP}
+\end{equation}
+\end{formula}
+para $\frac{dT}{dV}\Bigl|_{\Gamma}$: consideramos la expresión que relaciona dT y dV, e igualamos, por lo tanto llegamos a la siguiente igualdad
+\begin{equation}
+    C_VdT+ldV=C_{\Gamma}dT 
+\end{equation}
+y ahora va a ser de aquí de donde despejemos $\frac{dT}{dV}\Bigl|_{\Gamma}$:
+\begin{equation}
+     C_VdT+ldV=C_{\Gamma}dT \rightarrow ldV=C_{\Gamma}dT-C_VdT=(C_{\Gamma}-C_V) dT 
+\end{equation}
+pasando $dV$ al lado derecho: 
+\begin{formula}
+    \begin{equation}
+        \frac{l}{C_{\Gamma}-C_V}=\frac{dT}{dP}
+    \end{equation}
+\end{formula}
+\end{solucion}
+\item Un líquido tiene coeficiente de dilatación y compresión isoterma $\alpha$ y $\kappa_T$ constantes. Demeusstra que su ecuación de estado se puede expresar como:
+\begin{equation}
+    V=\alpha V_0T+\kappa_TV_0p \equiv \text{cte.}
+\end{equation}
+Ayuda: la variación del volumen para un líquido es tan pequeña que podemos considerar: 
+\begin{equation}
+    \ln(1+x) \approx x-\frac{x^2}{2}+...
+\end{equation}
+\begin{solucion}
+        Con las definiciones vistas anteriormente acerca de estos coeficientes, si escribimos la diferencial total de $V$ tenemos que
+    \begin{equation*}
+        dV=\Bigl(\frac{\partial V}{\partial T} \Bigl)_p dT+ \Bigl(\frac{\partial V}{\partial p }\Bigl)_T dp
+    \end{equation*}
+    y sustituyendo los coeficientes $\alpha$ y $\kappa_T$ podemos reescribrilo como 
+    \begin{equation*}
+        dV=(\alpha V)dT-(\kappa_TV)dp
+    \end{equation*}
+    dividimos por $V$ para separar las variables y llegamos a
+    \begin{equation*}
+        \frac{dV}{V}=\alpha dT-\kappa_Tdp
+    \end{equation*}
+    integramos desde un estado inicial $(V_0,T_0,p_0)$ hasta un estado $(V,T,p)$ y tenemos que
+    \begin{equation*}
+        \int_i^f \frac{dV}{V}=\int_i^f \alpha dT-\kappa_Tdp
+    \end{equation*}
+    como los coeficientes son constantes los sacamos de la integral y llegamos a 
+    \begin{equation*}
+        \ln(V)-\ln(V_0)= \alpha(T-T_0)-\kappa_T(p-p_0)
+    \end{equation*}
+    si reescribimos $V/V_0$ como $1+(V-V_0)/V_0=1+\Delta V/V_0$ podemos escribrir
+    \begin{equation*}
+        \ln\Bigl( 1+\frac{\Delta V}{V_0}\Bigl)=\alpha \Delta T- \kappa_T \Delta p 
+    \end{equation*}
+    si usamos la aproximación para variaciones de volumenes pequeña, podemos hacer un desarrollo de Taylor que nos deje con $\ln(1+x) \approx x$ de forma que podemos escribir una nueva expresión
+    \begin{equation*}
+        \frac{V-V_0}{V_0} \approx \alpha(T-T_0)- \kappa_T(p-p_0)
+    \end{equation*}
+    multiplicando por $V_0$
+    \begin{equation*}
+        V-V_0= \alpha V_0T- \alpha V_0T_0-\kappa_TV_0p +\kappa_TV_0p_0
+    \end{equation*}
+    reorganizando se puede dejar todas las variables a un lado del igual 
+    \begin{formula}
+    \begin{equation}
+        V=\alpha V_0 T +k_TV_0p=\text{cte.}
+    \end{equation}
+    \end{formula}
+\end{solucion}
+\item Un gas ideal en contacto con un foco térmico de temperatura $T$ se comprime de forma irreversibe bajo una $P_{ext}=P_2\equiv\text{cte.}$ pasando por $(V_1,P_1) \rightarrow (V_2,P_2)$. Se pide calcular en función de $P_1,P_2:$
+\begin{itemize}
+    \item Variación de la energía interna y entalpía del gas
+    \item Variación de la entropía del gas
+    \item Variación de la entropía del foco
+\end{itemize}
+\begin{solucion}
+    Para un gas ideal, tanto la energía interna como al entalpía depende únicamente de la temperatura. Como el proceso es isotermo, $\Delta T=0$ : 
+\begin{formula}
+    \begin{equation}
+    \Delta U= nC_V\Delta T=0
+\end{equation}
+\end{formula}
+\begin{formula}
+    \begin{equation}
+    \Delta H= nC_P\Delta T=0
+\end{equation}
+\end{formula}
+\begin{nota}
+    En un gas ideal, si la temperatura no cambia, su energía interna y su entalpía permanece constante, independientemente de si el proceso es reversible o irreversible
+\end{nota}
+
+La entropía es una función de estado por lo que su variación solo depende de los estados inicial y final, para un proceso isotérmico: 
+\begin{equation}
+    \Delta S_{\text{gas}}=nR\ln\Bigl(\frac{V_2}{V_1} \Bigl)
+\end{equation}
+usando la relación $\frac{V_2}{V_1}=\frac{P_1}{P_2}$: 
+\begin{formula}
+    \begin{equation}
+        \Delta S_{\text{gas}}=nR\ln\Bigl(\frac{P_1}{P_2}\Bigl)
+    \end{equation}
+\end{formula}
+al ser un proceso de compresión $p_2>p_1$, el logaritmo será negativo, lo que indica que la entropía del gas disminuye. 
+\\
+
+Para el foco térmico, consideramos una fuente infinita de su calor a una temperatura constate $T$. Su variaicón de entropía se define como: 
+\begin{equation}
+    \Delta S_{\text{foco}}=\frac{Q_{\text{foco}}}{T}
+\end{equation}
+Como se debe conservar la energía, el calor que absorbe el foco es el calor que cede al gas, entonces se cumple que: 
+\begin{equation}
+    Q_{\text{foco}}=- Q_{\text{gas}}
+    \label{foco_gas}
+\end{equation}
+Usando el primer principio; \begin{equation}
+    \Delta U=Q_{\text{gas}}+W_{\text{gas}} \xrightarrow{\Delta U=0} Q_{\text{gas}}=-W_{\text{gas}} \xrightarrow{\eqref{foco_gas}} Q_{\text{foco}}=W_{\text{gas}}
+\end{equation}
+El trabajo realizado sobre el gas en una compresión irreversible a presión externa constante es: 
+\begin{equation}
+    W_{\text{gas}}=-P_2(V_2-V_1)=P_2(V_1-V_2)
+\end{equation}
+aplicamos la ecuación de los gases ideales para sustituir los volúmenes: 
+\begin{equation}
+    W_{\text{gas}}=P_2\Bigl(\frac{nRT}{P_1}-\frac{nRT}{P_2}\Bigl)=nRT\Bigl(\frac{P_2}{P_1}-1\Bigl)
+\end{equation}
+y finalmente calculamos la entropía del foco 
+\begin{formula}
+    \begin{equation}
+        \Delta S_{\text{foco}}=\frac{W_{\text{gas}}}{T}=nR\Bigl(\frac{P_2}{P_1}-1\Bigl)
+    \end{equation}
+\end{formula}
+\end{solucion}
+
+\item Hallar la ecuación térmica de un sistema para el que sus coeficientes termodinámicos son: 
+\begin{equation}
+    \alpha=\frac{RV}{RTV-2a}, \quad\beta=\frac{R}{PV}
+\end{equation}
+\begin{solucion}
+    Entonces recordemos las definiciones para los coeficientes $\alpha$ y $\beta$
+\begin{definicion}[Coeficiente de dilatación]
+Para un sistema expansivo, definimos
+\begin{formula}
+    \begin{equation}
+    \alpha=\frac{1}{V}\Bigl( \frac{\partial V}{\partial T}\Bigl)_p
+\end{equation}
+\end{formula}
+expresado en $\text{K}^{-1}$
+\end{definicion}
+
+\begin{definicion}[Coeficiente piezotérmico]
+    Definimos $\beta$ como 
+\begin{formula}
+    \begin{equation}
+        \beta = \frac{1}{P} \Bigl( \frac{\partial P}{\partial T}\Bigl)_V
+    \end{equation}
+\end{formula}
+\end{definicion}
+De los datos del problema es inmediato deducir que: 
+\begin{equation}
+    \Bigl(\frac{\partial P}{\partial T}\Bigl)_V=P\beta=P\frac{R}{PV}=\frac{R}{V}
+\end{equation}
+Para hallar la ecuación de estado $P=P(T,V)$, necesitamos conocer sus derivadas parciales. Ya conocemos una, y ahora para hallar $\Bigl(\frac{\partial P}{\partial V}\Bigl)_T$, utilizamos la relación cíclica de las derivadas parciales: 
+\begin{equation}
+    \Bigl(\frac{\partial P}{\partial V} \Bigl)_T     \Bigl(\frac{\partial V}{\partial T} \Bigl)_P      \Bigl(\frac{\partial T}{\partial P} \Bigl)_V = -1 \rightarrow  \Bigl(\frac{\partial P}{\partial V} \Bigl)_T  = \frac{\Bigl(\frac{\partial V}{\partial T} \Bigl)_P}{\Bigl(\frac{\partial T}{\partial P} \Bigl)_V} 
+\end{equation}
+Al conocer la expresión de $\alpha$ podemos escribir, 
+\begin{equation}
+    \Bigl(\frac{\partial V}{\partial T}\Bigl)_P=V\alpha= V \cdot\frac{RV}{RTV-2a}=\frac{RV^2}{RTV-2a}
+\end{equation}
+entonces podemso sustituir
+\begin{equation}
+    \Bigl(\frac{\partial P}{\partial V}\Bigl)_T=-\frac{R/V}{\frac{RV^2}{RTV-2a}}=-\frac{RTV-2a}{V^3}=-\frac{RT}{V^2}+\frac{2a}{V^3}
+\end{equation}
+y ahora integramos el diferencial de presión, si mantenemos $V$ constante. 
+\begin{equation}
+    P=\int\Bigl(\frac{\partial P}{\partial T}\Bigl)_V dT=\int\frac{R}{V}
+dT=\frac{RT}{V}+f(V)
+\end{equation}
+derivamos el resultado respecto a $V$, 
+\begin{equation}
+    \Bigl(\frac{\partial P}{\partial V}\Bigl)_T=-\frac{RT}{V^2}+f'(V)=-\frac{RT}{V^2}+\frac{2a}{V^3} \rightarrow f'(V)=\frac{2a}{V^3}
+\end{equation}
+Integramos para hallar la función $f(v):$
+\begin{equation}
+    f(V)=\int\frac{2a}{V^3}dV=-\frac{a}{V^2}+C
+\end{equation}
+si consideramos $C=0$, llegamos a la siguiente ecuación térmica de estado
+\begin{formula}
+    \begin{equation}
+        p=\frac{RT}{V}-\frac{a}{V^2}
+    \end{equation}
+\end{formula}
+\end{solucion}
+\item Demuestre la \textbf{equivalencia entre los dos enunciados}, Kelvin-Planck y Clausius. del segundo principio de la Termodinámica
+\begin{solucion}[Demostración de la equivalencia entre ambas formulaciones]
+Buscamos demostrar que ambos enunciados son equivalentes. Para ello, supongamos que el enunciado de Kelvin-Planck es falso; entonces, seria posible construir una máquina térmica que absorba calor de un único 
+foco calorífico y lo convierta de forma integra en trabajo. Supongamos ahora que utilizamos el trabajo generado por esta máquina térmica para alimentar una máquina frigorifica que opera entre dos temperaturas $T_1$ y $T_2$, esta máquina frigorifica extrae una cantidad de calor $Q_2$ del foco frio y lo transfiere a un foco caliente sin violar ninguno de los enunciados por si sola. 
+\\
+Sin embargo, el conjunto de ambas máquinas, como se puede ver en \ref{fig:demo_compatible}
+que como único efecto y de forma cíclica, transfiere calor desde un foco frio a uno caliente violando el enunciado de Clausius.  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{demo_equiv.png}
+    \caption{Una maquina anti-Kelvin indica también que se viola Clauisus}
+    \label{fig:demo_compatible}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{demo_equiv2.png}
+    \caption{Una maquina anti-Clausisus deriva en una máquina anti-Kelvin}
+    \label{fig:demo_equiv2}
+\end{figure}
+
+Entonces hemos demostrado que ambos enunciados son equivalentes y por lo tanto podremos usar uno y otro dependiendo de nuestra conveniencia.
+
+\end{solucion}
+\item Demostrar que una máquina térmica que funcione entre dos focos térmicos no puede tener mayor rendimiento que una máquina de Carnot funcionando entre dichos focos.
+\begin{solucion}
+Presentamos entonces el sifuiente teorema 
+\begin{formula}
+      \begin{teorema}[Teorema de Carnot]
+    Ninguna máquina que opere entre dos temperaturas pueden tener mayor rendimiento que una máquina térmica de Carnot funcionando entre dichas temperaturas
+    \end{teorema}  
+\end{formula}
+
+    \begin{nota}
+        Es decir, toda máquina térmica que consideremos es menos eficiente que una máquina de Carnot. 
+    \end{nota}
+
+\begin{proof}
+    Vamos a demostrar este teorema, considerando dos máquina térmicas X y C operando entre los mismos focos de temperatura $T_1,T_2$ de manera que X es una máquina térmica cualquiera y C una máquina de Carnot como la que hemos descrito. Como el montaje que se encuentra en al figura \ref{demos_carnot}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{demo_carnot.png}
+        \caption{Maquina C y X usada para demsotrar el teorema de Carnot}
+        \label{demos_carnot}
+    \end{figure}
+
+    Siempre podremos configurar la máquina de Carnot de forma que, variando su velocidad, podamos extraer del foco caliente la misma cantidad de calor que la máquina X. Ajustaremos las máquinas de forma que
+    \begin{equation}
+        Q_1=Q'_1
+    \end{equation}
+    Si dadas estas condiciones, invertimos el sentido del funcionamiento de la máquina de Carnot y la acoplamos a la máquina X, podemos ver que el foco $T_1$ no interviene en el proceso, pues absorbe la misma cantidad de calor que cede. 
+    \\
+    Según el enunciado de Kelvin-Planck, sabemos que es imposible que, extrayendo calor de un solo foco, $Q_2'-|Q_2|$ obtener una cantidad equivalente de trabajo. Por lo tanto, le sistema que hemos construido debe satisfacer que: 
+    \begin{equation}
+        Q_2'-|Q_2|=W-W'=0
+    \end{equation}
+    Llegando a una solución válida. Y a partir de esta expresión podemos escribir: 
+    \begin{equation}
+        Q_2-|Q_2'|<0 \rightarrow Q_2<|Q_2'| \rightarrow \frac{Q_2}{Q_1}<\frac{|Q_2'|}{Q_1} \rightarrow1-\frac{|Q_2'|}{Q_1}>1-\frac{Q_2}{Q_1} \xrightarrow{\eta}\eta_C>\eta_X
+    \end{equation}
+Hemos llegado a la siguiente expresión
+\begin{formula}
+    \begin{equation}
+        \eta_C>\eta_X
+    \end{equation}
+\end{formula}
+que nos indica que el rendimiento de una máquina de Carnot que trabaje entre dos temperaturas dadas es siempre mayor que el rendimiento de cualquier otra máquina que trabaje entre los mismos focos térmicos. 
+\end{proof}
+
+De forma complementaria al teorema de Carnot podemos encontrar el siguiente corolario.
+\begin{corolario}
+    Todas las máquinas térmicas reversibles que funcionen entre dos temperaturas dadas tienen el mismo rendimiento
+\end{corolario}
+\begin{proof}
+    Consideremos ahora una máquina de Carnot y una máquina reversible funcionando entre dos focos de temperatura con sus rendimientos, que supongamos, verifican el teorema de Carnot, es decir
+    \begin{equation}
+        \eta_C>\eta_R
+    \end{equation}
+    es decir se verifica que
+    \begin{equation}
+        \frac{W}{Q_1}>\frac{W'}{Q_1'}
+    \end{equation}
+    Si ajustamos el funcionamiento de las máquinas para conseguir que el trabajo verfique que $W=W'$ tendremos que
+    \begin{equation}
+       Q_1<Q_1' \rightarrow|Q_1|<|Q_1'| \qquad \text{ya que}  \quad Q_1,Q_1'>0 
+    \end{equation}
+    Y también que: 
+    \begin{equation}
+        |Q_1|-|Q_2|=|Q_1'|-|Q_2'| \rightarrow |Q_1'|-|Q_1|=|Q_2'|-|Q_2|>0 \rightarrow|Q_2'|>|Q_2|
+    \end{equation}
+    Puesto que la máquina R es reversible, podemos invertir su sentido de funcionamiento y los intercambios de calor y trabajo se realizaran en sentido contrario. Si ahora acoplamos ambas máquinas, el resultado funcionara de forma que extraera una cantidad de calor $|Q_2'|>|Q_2|$ del foco frío y cedera una cantidad de calor $|Q_1'|-|Q_1|$ al foco caliente. Al ser estas cantidades iguales se transferirán sin hacer uso de un trabajo externo, \textbf{violando el enunciado de Clausius}, por lo tanto podemos concluir que la hipotesis de partida es \textbf{falsa}. Y por lo tanto no se puede verificar que $\eta_C>\eta_R$.
+    \\
+    Si suponemos ahora que $\eta_C<\eta_R$, incumplimos el teorema de Carnot, por lo tanto tampoco podemos verificar esta hipotesis. De forma que, ha de verificarse que $\eta_C=\eta_R$, independientemente de la sustancia que usen las máquinas y del tipo de trabajo que se extraiga de ellas, con lo que podemos entonces escribrir el siguiente enunciado de forma general
+    \begin{formula}
+    Cualquier máquina encuentra un limite teorico de rendimiento en una máquina de Carnot
+    \begin{equation}
+        \eta_C \geq \eta_X 
+    \end{equation}
+    pudiendo tratarse $X$ de una máquina reversible, caso donde si obtendriamos la igualdad.
+    \end{formula}
+\end{proof}
+\end{solucion}
+\item Una sociedad vende acciones de una central térmica que funciona entre dos focos térmicos proporcionando una potencia de 80 kW. Del foco caliente (800 K) absorbe 100 kW y cede 20 kW al foco frío (200 K). Examinando estos datos, ¿comprarías acciones de esta sociedad? Explicar razonadamente la respuesta.
+\begin{solucion}
+    Vamos a calcular el rendimiento para esta máquina térmica, lo que nos permitirá conocer el beneficio que podremos obtener de una central térmica como la que se plantea. Para ello, del primer principio de la Termodinámica, 
+    \begin{equation}
+        Q_A=W+Q_C
+    \end{equation}
+    donde los calores $Q_A$ y $Q_C$ representan el calor absorbido y cedido al foco respectivamente. Es inmediato comprobar que el sistema que nos presenta esta empresa cumple con el Primer Principio de la Termodinámica. 
+    \\
+    El Segundo Principio establece límites a la conversión de calor en trabajo. Según el Teorema de Carnot, ninguna máquina térmica que oepre entre dos focos puede tener un rendimiento mayor que una máquina reversible operando entre esos mismos focos. Si calculamos ambos rendimiento: 
+    \begin{itemize}
+        \item Para el rendimeinto real: 
+        \begin{equation}
+            \eta=\frac{W}{Q_A}=0.80
+        \end{equation}
+        \item Para una máquina de Carnot:
+        \begin{equation}
+            \eta_{\text{Carnot}}=1-\frac{T_{FF}}{T_{FC}}=1-\frac{200}{800}=1-0.25=0.75
+        \end{equation}
+    \end{itemize}
+\begin{nota}
+    \textbf{Conclusión:} El informe de la empresa nos presenta un rendimiento superior ($+5\%$) al que tendría una máquina de Carnot operando en las mismas condiciones que nos presentan, lo cual es imposible.
+\end{nota}
+Un planteamiento alternativo seria considerar el aumento de entropía del sistema, como sabemos que $\Delta S\geq0$. Podemos considerar: 
+\begin{equation}
+    \Delta S_{\text{universo}}=\Delta S_{\text{sistema}}+ \Delta S_{\text{entorno}}
+\end{equation}
+Como es ciclico; $\Delta S_{\text{sistema}}=0$. El entorno esta compuesto por dos focos: 
+\begin{formula}
+  \begin{equation}
+    \Delta S_{univ} = \frac{Q_C}{T_C} - \frac{Q_H}{T_H}
+\end{equation}  
+\end{formula}
+
+
+Sustituyendo los valores:
+\begin{equation}
+    \Delta S_{univ} = \frac{20 \text{ kW}}{200 \text{ K}} - \frac{100 \text{ kW}}{800 \text{ K}} \rightarrow    \Delta S_{univ} = 0.1 \text{ kW/K} - 0.125 \text{ kW/K}
+\end{equation}
+y por lo tanto: 
+\begin{equation}
+    \Delta S_{univ} = -0.025 \text{ kW/K}
+\end{equation}
+
+\begin{nota}
+    \textbf{Solución}: Como $\Delta S_{univ} < 0$, el proceso viola el Principio de Aumento de Entropía y además el rendimiento real ($\eta = 0.8$) supera al límite de Carnot ($\eta_{max} = 0.75$). Por lo tanto, la máquina es físicamente imposible y no se recomienda la compra de acciones.
+\end{nota}
+\end{solucion}
+\end{enumerate}
+\chapter{Problemas prácticos. Seminarios}
+Se recoge a continuación, una serie de ejercicios tipo propios de la parte de los seminarios de esta asignatura
+\begin{enumerate}
+    \item Tenemos un termistor de ley \begin{equation}
+        R(\Omega)=R_0e^{B/T(K)} 
+        \label{enunciado_termometro}
+    \end{equation}
+    siendo $R_0,B$ constantes. Cuando se calibra dicho termistor, en el punto triple del agua $(0.01 \text{ºC})$ se encuentra una resistencia $R_T=938,7 \Omega$ y en el punto de ebullición normal del agua $(100 \text{ºC})$ se encuentra $R_V=1055,2 \Omega$. Calcular la temperatura que mide el termistor cuando su lectura es de $1004,5 \Omega$
+
+\begin{solucion}
+    La relación \eqref{enunciado_termometro} nos arroja estos datos: 
+    \begin{cases}
+        T=273,1 \text{K}\rightarrow R_T=938,7 \Omega
+        \\
+        T=373 \text{K} \rightarrow R_V=1055,5 \Omega\end{cases}
+\\
+Vamos a usarlos para calcular ecuación de corrección,tenemos que
+\begin{equation}
+    \begin{cases}
+R_1(\Omega)=938,7=R_0e^{B/273,1}\\R_2(\Omega)=1055,2=R_0e^{B/373}
+    \end{cases} \xrightarrow{R_1/R_2} \frac{938,7}{1055,2}=e^{B/273,1-B/373}
+\end{equation}
+de donde podemos despejar: 
+\begin{equation}
+    \ln(0,89)=B/273,1-B/373 \rightarrow \ln(0,89)=B(1/273,1-1/373) \rightarrow 
+\end{equation}
+por lo tanto $B$ vendrá dada por 
+\begin{equation}
+    B= \frac{\ln(0,89)}{(1/273,1-1/373)}=-118.83\text{K}
+\end{equation}
+ahora podemos tomar cualquiera de los $R(\Omega)$ y calcular $R_0$. Como, 
+\begin{equation}
+    938,7=R_0e^{-118,83/273,1} \rightarrow R_0=1457,5
+\end{equation}
+\end{solucion}
+
+\item Determinar la ecuación térmica de estado de un sistema con coeficientes termodinámicos expresados por
+\begin{equation}
+    \alpha=\frac{3aT^3}{V}, \qquad \beta=\frac{3aT^3}{Pb}
+\end{equation}
+\begin{solucion}
+    Definimos un diferencial de T(V,P): 
+\begin{formula}
+    \begin{equation}
+        dT=\Bigl(\frac{\partial T}{\partial V}\Bigl)_P dV+\Bigl(\frac{\partial T}{\partial P}\Bigl)_T
+    \end{equation}
+\end{formula}
+desarrollando este diferencial para expresarlo en función de los coeficientes que se nos dan
+\begin{equation}
+    dT=\Bigl(\frac{\partial T}{\partial V}\Bigl)_P dV+\Bigl(\frac{\partial T}{\partial P}\Bigl)_T dP= \frac{1}{\Bigl(\frac{\partial V}{\partial T}\Bigl)_P}dV+\frac{1}{\Bigl(\frac{\partial P}{\partial T}\Bigl)_V}dP = \frac{1}{V\alpha}dV+\frac{1}{P\beta}dP
+\end{equation}
+Esto nos permite reescribir esta expresión como
+\begin{equation}
+    dT=\frac{1}{V \alpha}dV+\frac{1}{P\beta}  \rightarrow dT=\frac{1}{V\frac{3aT^3}{V}}dV+\frac{1}{P\frac{3aT^3}{Pb}}dP  \rightarrow dT=\frac{1}{3aT^3}dV+\frac{b}{3aT^3}dP
+\end{equation}
+separamos las variables
+\begin{equation}
+    3aT^3 dT =dV+bdP 
+\end{equation}
+si ahora integramos
+\begin{equation}
+\frac{3a}{4} T^4 = V + bP + K \xrightarrow{(2)} {\frac{3a}{4} T^4} = {\frac{3}{4}a T^4} - {bP} + {K} + {bP} + {K} \longrightarrow K = 0
+\end{equation}
+
+\textbf{y ahora nos centramos en obtener K}
+
+\begin{equation}
+\alpha = \frac{1}{V} \left( \frac{\partial V}{\partial T} \right)_P = \frac{1}{V} 3a T^3 \longrightarrow \frac{dV}{dT} = 3a T^3 \longrightarrow V = \frac{3}{4} a T^4 + f(P)
+\end{equation}
+
+\begin{equation}
+\text{luego } \alpha = P \kappa_T \beta \longrightarrow \kappa_T = \frac{b}{V} = -\frac{1}{V} \left( \frac{\partial V}{\partial P} \right)_T = -\frac{1}{V} f'(P) \longrightarrow f(P) = -bP + K
+\end{equation}
+
+\begin{equation}
+V = \frac{3}{4} a T^4 - bP + K 
+\end{equation}
+
+llegamos a la ecuación térmica:
+\begin{formula}
+    \begin{equation}
+        \frac{3a}{4} T^4 = V + bP
+    \end{equation}
+\end{formula}
+\end{solucion}
+
+\item Un líquido de coeficiente de compresibilidad isotermo $\kappa_T$ se comprime reversible e irreversiblemente desde un volumen $V_0$ a un volumen $V$, si llamamos $P_0$ a la presión, calcular el trabajo realizado durante la compresión. 
+\begin{solucion}
+    El proceso es isotermo ($dT=0$), por lo que el cambio de presión depende solo del volumen:
+\begin{equation}
+dP = \left( \frac{\partial P}{\partial T} \right)_V dT + \left( \frac{\partial P}{\partial V} \right)_T dV \longrightarrow dP = -\frac{1}{V \kappa_T} dV
+\end{equation}
+
+Integramos la expresión desde el estado inicial $(P_0, V_0)$ hasta el final $(P, V)$ para obtener la presión en función del volumen:
+\begin{equation}
+\int_{P_0}^{P} dP = -\frac{1}{\kappa_T} \int_{V_0}^{V} \frac{1}{V} dV \longrightarrow (P - P_0) = -\frac{1}{\kappa_T} \ln\left(\frac{V}{V_0}\right)
+\end{equation}
+
+Sustituimos la expresión de la presión $P = P_0 - \frac{1}{\kappa_T} \ln(V/V_0)$ en la definición termodinámica de trabajo ($W = -\int P dV$):
+\begin{equation}
+W = \int_{V_0}^{V} \left[ P_0 - \frac{1}{\kappa_T} \ln\left(\frac{V}{V_0}\right) \right] dV
+\end{equation}
+
+A resolver la integral (usando integración por partes para el logaritmo), obtenemos el trabajo realizado durante la compresión:
+\begin{formula}
+    \begin{equation}
+W = P_0(V - V_0) - \frac{1}{\kappa_T} \left[ V \ln\left(\frac{V}{V_0}\right) - (V - V_0) \right]
+\end{equation}
+\end{formula}
+\end{solucion}
+
+\item Calcular el trabajo necesario para llevar un sistema cuya ecuación energética es de la forma
+\begin{equation}
+    U=2pV+C
+    \label{enunciado_4}
+\end{equation}
+con $C$ una constante, desde un estado inicial $(P_0=1\text{ atm},V_0=4 \text{ L})$ a otro final $(P_0,4V_0)$, siguiendo un proceso adiabático reversible 
+\begin{solucion}
+    Para un proceso adiabático, $Q=0$, entonces el primer principio de la termodinámica nos permite escribir la siguiente igualdad: 
+    \begin{equation}
+        \Delta U=Q-W \xrightarrow{Q=0} \Delta U =-W
+        \end{equation}
+    Entonces el trabajo realizado por el sistema vendrá dado por
+\begin{formula}
+    \begin{equation}
+        \label{ejercicio_4}
+        W=U_i-U_f
+    \end{equation}\end{formula}
+Entonces sustituyendo en \eqref{enunciado_4} calculamos la energía interna en cada estado: 
+\begin{equation}
+U_i=2P_0V_0+C \qquad U_f=2P_0(4V_0)+C
+\end{equation}
+restando ambas expresiones, llegamos a la expresión del trabajo: 
+\begin{equation}
+    U_i-U_f=2P_0V_0-8P_0V_0=-6P_0V_0
+\end{equation}
+sustituyendo con los datos que nos presenta el enunciado llegamos a 
+\begin{formula}
+    \begin{equation}
+        W=-24\text{ atm} \cdot \text{L} \rightarrow
+        W=-24 \text{atm} \cdot\text{L} \cdot \frac{101,325 \text{J}}{1 \text{ atm} \cdot \text{L}} \rightarrow W=-2431,8 \text{J}
+        \end{equation}
+\end{formula}
+
+\end{solucion}
+\item Un líquido de coeficiente de compresibilidad isoterma constante igual a $k$, se comprime reversible e isotérmicamente desde un $V_0$ a $\frac{V_0}{2}$. Si llamamos $P_0$ a la presión inicial, ¿cuál será la final?
+\begin{solucion}
+Partimos de la definición:
+\begin{formula}
+\begin{equation}
+k = -\frac{1}{V} \left( \frac{\partial V}{\partial P} \right)_T
+\end{equation}
+\end{formula}
+
+Dado que el proceso es isotérmico y $k$ es constante, podemos reordenar la expresión como una ecuación diferencial de variables separables:
+
+\begin{equation}
+dP = -\frac{1}{k} \frac{dV}{V}
+\end{equation}
+
+Integrando en ambos lados desde el estado inicial $(P_0, V_0)$ hasta el estado final $(P_f, V_0/2)$:
+
+\begin{equation}
+\int_{P_0}^{P_f} dP = -\frac{1}{k} \int_{V_0}^{V_0/2} \frac{dV}{V} \rightarrow P_f - P_0 = -\frac{1}{k} \left[ \ln(V) \right]_{V_0}^{V_0/2}
+\end{equation}
+
+
+
+Sustituyendo los límites de integración:
+
+\begin{equation}
+P_f - P_0 = -\frac{1}{k} \left( \ln\left(\frac{V_0}{2}\right) - \ln(V_0) \right)
+\end{equation}
+
+Utilizando las propiedades de los logaritmos, simplificamos el término de la derecha:
+
+\begin{equation}
+P_f - P_0 = -\frac{1}{k} \ln\left( \frac{V_0/2}{V_0} \right) = -\frac{1}{k} \ln\left( \frac{1}{2} \right)
+\end{equation}
+
+Como $-\ln(1/2) = \ln(2)$, la expresión para la presión final es:
+\begin{formula}
+\begin{equation}
+P_f = P_0 + \frac{\ln(2)}{k}
+\end{equation}
+\end{formula}
+\end{solucion}
+\end{enumerate}
+\end{document}
